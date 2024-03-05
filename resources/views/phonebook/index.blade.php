@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div class="flex flex-col">
@@ -40,7 +41,7 @@
                         <form method="POST" action="{{ route('phonebook.store') }}">
                         @csrf <!-- {{ csrf_field() }} -->
 
-                            <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-2 gap-6">
                                 
                             <!--First name input-->
                             <div class="relative mb-6">
@@ -61,9 +62,10 @@
                                         display: none;
                                         }
                                 </style>
+                                
                             </div>
 
-                            <!--Last name input-->
+                            
                             <div class="relative mb-6">
                                 <input
                                 type="text"
@@ -84,6 +86,7 @@
                                 </style>
                             </div>
                             </div>
+                            
                                     
                             <!-- Account Number -->
                             <div class="relative mb-6" >
@@ -144,11 +147,13 @@
                                 <div class="text-4xl font-bold text-danger-600 py-4">
                                     {{ Auth::user()->name }}
                                 </div>
-                                <div class="text-white">Philippine Standard Time</div>
-                                    <div id="clock" class="text-4xl font-bold text-danger-600">
-
-                                    </div>
+                                <div class="text-white text-lg">Philippine Standard Time</div>
+                                    <div id="clock" class="text-6xl font-bold text-danger-600"></div>
+                                        <div class="text-danger-600 py-4 font-bold text-2xl"> 1 € (Euro) = 60.70 ₱ (Philippine Peso)</div>                                  
+                                            <div class="text-white"> as of 05/03/2024</div>
+                                             
                         </div>
+                        
                             <!-- CLOCK IN PH -->
                             <script>
                                 function startTime() {
@@ -173,6 +178,8 @@
                             </script>
                         </div>
 
+                        
+
                     </div>
                    
 
@@ -182,17 +189,17 @@
                         <!-- TABLE -->
 
                         <table
-                            class="min-w-full border text-center text-sm font-light dark:border-neutral-500 ">
-                                <thead class="border-b bg-neutral-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-600">
+                            class="min-w-full text-center text-sm font-light dark:border-neutral-500 ">
+                                <thead class=" font-medium text-white dark:border-neutral-500 dark:bg-neutral-600">
                                     <tr>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-6 py-4 dark:border-neutral-500 rounded-tl-[1.5rem]">
                                             First Name
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-6 py-4 dark:border-neutral-500 ">
                                             Last Name
                                         </th>
                                         <th
@@ -205,13 +212,13 @@
                                             class="border-r px-6 py-4 dark:border-neutral-500">
                                             Account Number
                                         </th>
-                                        <th scope="col" class="px-6 py-4">Time</th>
+                                        <th scope="col" class="px-6 py-4 rounded-tr-[1.5rem]">Time</th>
                                         
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($contacts as $cont)
-                                        <tr class="border-b dark:border-neutral-500 ease-in-out hover:bg-neutral-100">
+                                        <tr class="border-b  dark:border-neutral-500 ease-in-out  hover:bg-neutral-100">
                                             <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
                                             {{ $cont->first_name }}
                                             </td>
@@ -220,7 +227,7 @@
                                             </td>
                                             <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">{{ $cont->phone_number }}</td>
                                             <td
-                                                class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500 ">
+                                                class="whitespace-nowrap  border-r px-6 py-4 dark:border-neutral-500 ">
                                                 <a href="{{ route('phonebook.edit', ['id' => $cont->id] ) }}"
                                                     class="text-indigo-600 hover:text-indigo-900">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
@@ -231,7 +238,7 @@
                                                 </a>
                                             </td>
                                             <td
-                                                class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500 ">
+                                                class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500  ">
                                                 <form action="{{ route('phonebook.delete',$cont->id) }}" method="GET" onsubmit="return confirm('{{ trans('Are you sure you want to delete this ? ') }}');">
                                                     @csrf
                                                     <button type="submit" class="flex items-center">
