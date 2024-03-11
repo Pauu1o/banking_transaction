@@ -2,7 +2,10 @@
 
 @section('content')
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 500a0d69a122f449bdbd86f2efe1d6903730d04b
 <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div class="flex flex-col">
