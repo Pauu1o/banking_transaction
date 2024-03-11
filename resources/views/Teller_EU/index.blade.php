@@ -127,27 +127,6 @@
                                 </style>
                             </div>
                             
-                              <!-- Transaction Type -->
-                              <div class="relative mb-6">
-                                <select
-                                    id=""
-                                    name=""
-                                    class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-3 leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                >
-                                    <option value="" >Recieving</option>
-                                    <option value="" >Sending</option>
-                                </select>
-                               
-
-                            <style>
-                                    #phonenumber:not(:placeholder-shown) + label {
-                                        display: none;
-                                        }
-                                </style>
-
-                                
-                            </div>
-                            
                                     
                             <!--Submit button-->
                             <button
@@ -158,8 +137,6 @@
                             Create Transaction
                             </button>
                         </form>  
-
-                        
                         </div>
 
                         <!-- Welcome Back -->
@@ -176,15 +153,13 @@
                                             <div class="text-white"> as of 05/03/2024</div>
                                              
                         </div>
-
                         
-                        
-                            <!-- CLOCK IN PH -->
+                            <!-- CLOCK IN EU -->
                             <script>
                                 function startTime() {
-                                    const today = new Date();
                                     const options = { timeZone: 'Europe/Paris' };
-                                    today.setUTCHours(today.getUTCHours() + 7);
+                                    let h = today.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', timeZone: 'Europe/Paris' });
+                                    const today = new Date();
                                     let h = today.getHours();
                                     let m = today.getMinutes();
                                     let s = today.getSeconds();

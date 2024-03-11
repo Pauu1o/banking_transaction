@@ -110,7 +110,7 @@ Login
             </div>
 
             <!--Forgot password link-->
-            <a href="#!" class="text-white hover:text-danger">Forgot password?</a>
+            <a href="#!" class="text-white hover:text-danger px-2">Forgot password?</a>
           </div>
 
           <!-- Login button -->
