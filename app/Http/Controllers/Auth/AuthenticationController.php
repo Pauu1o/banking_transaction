@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\admin;
 
 class AuthenticationController extends Controller
 {
@@ -39,10 +40,15 @@ class AuthenticationController extends Controller
 
         // Attempt to log in as admin if the credentials match
         if ($is_admin) {
-            $admin = Admin::where('email', 'admin@admin.com')->first();
+            $admin = admin::where('email', 'admin@admin.com')->first();
             if ($admin) {
                 Auth::login($admin);
+
                 return redirect()->intended('admin/dashboard');
+
+                //return redirect()->intended('resources/views/admin/index.blade.php');
+                return redirect()->route('admin.index');
+
             }
         }
 
