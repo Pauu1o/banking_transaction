@@ -127,17 +127,22 @@
                                 </style>
                             </div>
                             
-                              <!-- Transaction Type -->
+                              <!-- Ammount Number -->
                               <div class="relative mb-6">
                                 <select
-                                    id=""
-                                    name=""
-                                    class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-3 leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                    id="phonenumber"
+                                    name="phone_number"
+                                    class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                 >
-                                    <option value="" >Recieving</option>
-                                    <option value="" >Sending</option>
+                                    <option value="">Recieving</option>
+                                    <option value="">Recieving</option>
+                                    <!-- Add your options here -->
                                 </select>
-                               
+                                <label
+                                    for="phonenumber"
+                                    class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
+                                    >Ammount
+                                </label>
 
                             <style>
                                     #phonenumber:not(:placeholder-shown) + label {
