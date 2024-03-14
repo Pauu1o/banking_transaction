@@ -36,18 +36,27 @@ class PhonebookController extends Controller
     public function store(Request $request) : RedirectResponse
     {
         $validated = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required|numeric|min:11',
+            'sender_firstname' => 'required',
+            'sender_lastname' => 'required',
+            'receiver_firstname' => 'required',
+            'receiver_lastname' => 'required',
+            'amount' => 'required',
+            'transaction_status' => 'required',
+            'transaction_type' => 'required',
+
 
         ]);
         
         try {
             // Your code that may throw an exception
             $phonebook = new Phonebook;
-            $phonebook->first_name = $request->first_name;
-            $phonebook->last_name = $request->last_name;
-            $phonebook->phone_number = $request->phone_number;
+            $phonebook->sender_firstname = $request->sender_firstname;
+            $phonebook->sender_lastname = $request->sender_lastname;
+            $phonebook->receiver_firstname = $request->receiver_firstname;
+            $phonebook->receiver_lastname = $request->receiver_lastname;
+            $phonebook->amount = $request->amount;
+            $phonebook->transaction_status = $request->transaction_status;
+            $phonebook->transaction_type = $request->transaction_type;
     
             $phonebook->saveOrFail();
             return redirect()->back();

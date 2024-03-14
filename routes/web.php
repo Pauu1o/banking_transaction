@@ -13,13 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-<<<<<<< HEAD
-=======
 Route::get('/admin', function () {
     return view('admin.index');
 })->name('admin.index');
 
->>>>>>> 500a0d69a122f449bdbd86f2efe1d6903730d04b
 Route::get('/', function () {
     return view('welcome');
 });

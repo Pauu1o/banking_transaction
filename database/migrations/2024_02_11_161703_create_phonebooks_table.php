@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('phonebooks', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('phone_number');
+            $table->string('sender_firstname');
+            $table->string('sender_lastname');
+            $table->string('receiver_firstname');
+            $table->string('receiver_lastname');
+            $table->string('amount');
+            $table->string('transaction_status');
+            $table->string('transaction_type');
             $table->timestamps();
         });
     }

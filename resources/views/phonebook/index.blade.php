@@ -43,19 +43,19 @@
 
                         <div class="grid grid-cols-2 gap-6">
                                 
-                            <!--First name input-->
+                            <!--Sender First name input-->
                             <div class="relative mb-6">
                                 <input
                                 type="text"
                                 class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem]  leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="firstname"
-                                name="first_name"
-                                aria-describedby="firstname"
-                                placeholder="First name"  />
+                                id="sender_firstname"
+                                name="sender_firstname"
+                                aria-describedby="sender_firstname"
+                                placeholder="Sender First Name"  />
                                 <label
-                                for="firstname"
+                                for="sender_firstname"
                                 class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
-                                >First name
+                                >Sender First Name
                                 </label>
                                 <style>
                                     #firstname:not(:placeholder-shown) + label {
@@ -70,14 +70,14 @@
                                 <input
                                 type="text"
                                 class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem]  leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="lastname"
-                                name="last_name"
-                                aria-describedby="lastname"
-                                placeholder="Last name" />
+                                id="sender_lastname"
+                                name="sender_lastname"
+                                aria-describedby="sender_lastname"
+                                placeholder="Sender Last Name" />
                                 <label
-                                for="lastname"
+                                for="sender_lastname"
                                 class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
-                                >Last name
+                                >Sender Last Name
                                 </label>
                                 <style>
                                     #lastname:not(:placeholder-shown) + label {
@@ -85,40 +85,68 @@
                                         }
                                 </style>
                             </div>
+                        </div>
+                        
+                        <!-- Receiver Name Portion -->
+                        <div class="grid grid-cols-2 gap-6">
+                                
+                            <!--Receiver First name input-->
+                            <div class="relative mb-6">
+                                <input
+                                type="text"
+                                class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem]  leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                id="receiver_firstname"
+                                name="receiver_firstname"
+                                aria-describedby="receiver_firstname"
+                                placeholder="Receiver First Name"  />
+                                <label
+                                for="receiver_firstname"
+                                class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
+                                >Receiver First Name
+                                </label>
+                                <style>
+                                    #firstname:not(:placeholder-shown) + label {
+                                        display: none;
+                                        }
+                                </style>
+                                
                             </div>
+
+                            
+                            <div class="relative mb-6">
+                                <input
+                                type="text"
+                                class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem]  leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                id="receiver_lastname"
+                                name="receiver_lastname"
+                                aria-describedby="receiver_lastname"
+                                placeholder="Receiver Last Name" />
+                                <label
+                                for="receiver_lastname"
+                                class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
+                                >Receiver Last Name
+                                </label>
+                                <style>
+                                    #lastname:not(:placeholder-shown) + label {
+                                        display: none;
+                                        }
+                                </style>
+                            </div>
+                        </div>
                             
                                     
-                            <!-- Account Number -->
+                            <!-- Amount Number in PhP -->
                             <div class="relative mb-6" >
                             <input
                                 type="text"
                                 class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem]  leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="phonenumber"
-                                name="phone_number"
-                                placeholder="Phone number" />
+                                id="amount"
+                                name="amount"
+                                placeholder="amount" />
                             <label
-                                for="phonenumber"
+                                for="amount"
                                 class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
-                                >Account Number
-                            </label>
-                            <style>
-                                    #phonenumber:not(:placeholder-shown) + label {
-                                        display: none;
-                                        }
-                                </style>
-                            </div>
-                             <!-- Ammount Number -->
-                             <div class="relative mb-6" >
-                            <input
-                                type="text"
-                                class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem]  leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="phonenumber"
-                                name="phone_number"
-                                placeholder="Phone number" />
-                            <label
-                                for="phonenumber"
-                                class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
-                                >Ammount
+                                >Amount
                             </label>
                             <style>
                                     #phonenumber:not(:placeholder-shown) + label {
@@ -127,22 +155,18 @@
                                 </style>
                             </div>
                             
-                              <!-- Ammount Number -->
-                              <div class="relative mb-6">
+                            <!-- Drop Down for Transaction Status -->
+                            <div class="relative mb-6">
                                 <select
-                                    id="phonenumber"
-                                    name="phone_number"
+                                    id="transaction_status"
+                                    name="transaction_status"
                                     class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                 >
-                                    <option value="">Recieving</option>
-                                    <option value="">Recieving</option>
-                                    <!-- Add your options here -->
+                                    <option value="Pending">Pending</option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Failed">Failed</option>
+                                    
                                 </select>
-                                <label
-                                    for="phonenumber"
-                                    class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
-                                    >Ammount
-                                </label>
 
                             <style>
                                     #phonenumber:not(:placeholder-shown) + label {
@@ -153,7 +177,27 @@
                                 
                             </div>
                             
+                            <!-- Drop Down for Transaction Type -->
+                            <div class="relative mb-6">
+                                <select
+                                    id="transaction_type"
+                                    name="transaction_type"
+                                    class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                >
+                                    <option value="Local">Local</option>
+                                    <option value="International">International</option>
                                     
+                                </select>
+
+                            <style>
+                                    #phonenumber:not(:placeholder-shown) + label {
+                                        display: none;
+                                        }
+                                </style>
+
+                                
+                            </div>
+
                             <!--Submit button-->
                             <button
                             type="submit"
@@ -227,17 +271,27 @@
                                         <th
                                             scope="col"
                                             class="border-r px-6 py-4 dark:border-neutral-500 rounded-tl-[1.5rem]">
-                                            Client Name
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500 ">
-                                            Ammount (Pesos) 
+                                            Sender Name
                                         </th>
                                         <th
                                             scope="col"
                                             class="border-r px-6 py-4 dark:border-neutral-500">
-                                            Ammount (Euro)
+                                            Receiver Name
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-6 py-4 dark:border-neutral-500 ">
+                                            Amount (Pesos) 
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            Amount (Euro)
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            Transaction Status
                                         </th>
                                         <th
                                             scope="col"
@@ -252,14 +306,24 @@
                                     @foreach ($contacts as $cont)
                                         <tr class="border-b bg-white dark:border-neutral-500 ease-in-out text-lg  hover:bg-neutral-100">
                                             <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->first_name }} {{ $cont->last_name }}
+                                            {{ $cont->sender_firstname }} {{ $cont->sender_lastname }}
                                             <br>
-                                            <div class="font-light">{{ $cont->phone_number }} </div>
-                                            </td>
-                                            <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                            {{ $cont->last_name }}
-                                            </td>
-                                            <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">{{ $cont->phone_number }}</td>\
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->receiver_firstname }} {{ $cont->receiver_lastname }}
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->amount }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->amount }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->transaction_status }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->transaction_type }} 
+                                            <br>
+                                            
                                             
                                             <!-- Delete -->
                                             <td
