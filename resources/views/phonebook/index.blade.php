@@ -197,14 +197,16 @@
 
                                 
                             </div>
+                            
+                            <input type="hidden" name="transaction_time" id="transaction_time">
 
                             <!--Submit button-->
                             <button
-                            type="submit"
-                            class="inline-block w-full rounded-[1rem] bg-danger-600 px-10 pb-2 pt-2 text-md font-bold uppercase leading-normal text-white transition duration-150 ease-in-out focus:bg-danger-700 hover:text-white hover:bg-danger-700 focus:outline-none focus:ring-0 active:bg-gray-200"
-                            data-te-ripple-init
-                            data-te-ripple-color="light">
-                            Create Transaction
+                                type="submit"
+                                class="inline-block w-full rounded-[1rem] bg-danger-600 px-10 pb-2 pt-2 text-md font-bold uppercase leading-normal text-white transition duration-150 ease-in-out focus:bg-danger-700 hover:text-white hover:bg-danger-700 focus:outline-none focus:ring-0 active:bg-gray-200"
+                                data-te-ripple-init
+                                data-te-ripple-color="light">
+                                Create Transaction
                             </button>
                         </form>  
 
@@ -217,7 +219,7 @@
                                 Welcome Back! 
                             </div>
                                 <div class="text-4xl font-bold text-danger-600 py-4">
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                                 </div>
                                 <div class="text-white text-lg">Europe Standard Time</div>
                                     <div id="clock" class="text-6xl py-4 font-bold text-danger-600"></div>
@@ -225,10 +227,26 @@
                                              
                         </div>
 
-                        
+                            
                         
                             <!-- CLOCK IN PH -->
                             <script>
+
+                                const createTransactionButton = document.querySelector('button[type="submit"]');
+                                
+                                createTransactionButton.addEventListener('click', setTransactionTime);
+
+                                function setTransactionTime() {
+                                    console.log("Setting transaction time...");
+                                    const now = new Date();
+                                    const timeInput = document.getElementById('transaction_time');
+                                    // Format the current time as needed (e.g., to ISO format)
+                                    const formattedTime = now.toISOString();
+                                    timeInput.value = formattedTime;
+                                    document.querySelector('form').submit();
+
+                                }
+
                                 function startTime() {
                                     const today = new Date();
                                     const options = { timeZone: 'Europe/Paris' };
@@ -250,11 +268,13 @@
                                 }
                             
                                 startTime(); // Start the clock immediately
+
+                                // Add event listener to the form submission event
                             </script>
                             
                             <!-- Conversion API -->
                             <script>
-                                const API_KEY = '52b74f0f831e0aa311149335';
+                                // const API_KEY = '52b74f0f831e0aa311149335';
                                 const req_url = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/EUR`;
 
                                 // Fetch data from the API
@@ -319,12 +339,17 @@
                                             class="border-r px-6 py-4 dark:border-neutral-500">
                                             Transaction Type
                                         </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            Reference Code
+                                        </th>
                                         <th scope="col" class="px-6 py-4 rounded-tr-[1.5rem]">Time</th>
                                         
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($contacts as $cont)
+                                    @foreach ($sentTransactions as $cont)
                                         <tr class="border-b bg-white dark:border-neutral-500 ease-in-out text-lg  hover:bg-neutral-100">
                                             <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
                                             {{ $cont->sender_firstname }} {{ $cont->sender_lastname }}
@@ -343,6 +368,12 @@
                                             <br>
                                             <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
                                             {{ $cont->transaction_type }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->reference_code }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->transaction_time }} 
                                             <br>
                                             
                                             

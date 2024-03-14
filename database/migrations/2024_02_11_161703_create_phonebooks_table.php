@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('amount');
             $table->string('transaction_status');
             $table->string('transaction_type');
+            $table->string('transaction_time');
+            $table->string('reference_code');
             $table->timestamps();
         });
     }

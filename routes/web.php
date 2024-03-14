@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Phonebook;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Route definition in Laravel
+Route::get('/transactions', function () {
+    $referenceCode = request()->input('reference_code');
+    
+    // Step 3: Server-Side Filtering
+    $filteredTransactions = Phonebook::where('reference_code', $referenceCode)->get();
+
+    // Step 4: Return Filtered Data
+    return response()->json($filteredTransactions);
+});
 
 Route::get('/admin', function () {
     return view('admin.index');

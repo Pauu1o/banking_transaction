@@ -65,18 +65,38 @@ Register
           
 
 
-          <!-- Full Name -->
+          <!-- First Name -->
           <div class="relative mb-6">
               <input
               type="text"
               class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-              id="name"
-              name="name"
-              placeholder="full name" />
+              id="first_name"
+              name="first_name"
+              placeholder="first_name" />
             <label
-              for="name"
+              for="first_name"
               class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
-              >Full Name
+              >First Name
+            </label>
+            <style>
+              #name:not(:placeholder-shown) + label {
+                display: none;
+                }
+            </style>
+          </div>
+        
+          <!-- Last Name -->
+          <div class="relative mb-6">
+              <input
+              type="text"
+              class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+              id="last_name"
+              name="last_name"
+              placeholder="last_name" />
+            <label
+              for="last_name"
+              class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
+              >Last Name
             </label>
             <style>
               #name:not(:placeholder-shown) + label {

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Phonebook;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 
 class PhonebookController extends Controller
@@ -15,10 +17,15 @@ class PhonebookController extends Controller
      */
     public function index()
     {
-        if (Auth::check())
-        {
-            $contacts = Phonebook::all();
-            return view('phonebook.index',compact('contacts'));
+        if (Auth::check()) {
+            // Fetch transactions where the sender or receiver first name and last name match the authenticated user's first name and last name
+            $sentTransactions = Phonebook::where('sender_firstname', Auth::user()->first_name)
+                ->orWhere('receiver_firstname', Auth::user()->first_name)
+                ->where('sender_lastname', Auth::user()->last_name)
+                ->orWhere('receiver_lastname', Auth::user()->last_name)
+                ->get();
+    
+            return view('phonebook.index', compact('sentTransactions'));
         }
     }
 
@@ -33,22 +40,30 @@ class PhonebookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request)
     {
         $validated = $request->validate([
-            'sender_firstname' => 'required',
-            'sender_lastname' => 'required',
-            'receiver_firstname' => 'required',
-            'receiver_lastname' => 'required',
-            'amount' => 'required',
-            'transaction_status' => 'required',
-            'transaction_type' => 'required',
+        'sender_firstname' => 'required',
+        'sender_lastname' => 'required',
+        'receiver_firstname' => 'required',
+        'receiver_lastname' => 'required',
+        'amount' => 'required',
+        'transaction_status' => 'required',
+        'transaction_type' => 'required',
+        'transaction_time' => 'required',
+    ]);
 
+    try {
 
-        ]);
-        
-        try {
-            // Your code that may throw an exception
+        $receiver = User::where('first_name', $request->receiver_firstname)
+                ->where('last_name', $request->receiver_lastname)
+                ->first();
+
+        if ($receiver){
+            // Generate reference code
+            $referenceCode = $this->generateReferenceCode();
+
+            // Store the form data along with the generated reference code
             $phonebook = new Phonebook;
             $phonebook->sender_firstname = $request->sender_firstname;
             $phonebook->sender_lastname = $request->sender_lastname;
@@ -57,20 +72,59 @@ class PhonebookController extends Controller
             $phonebook->amount = $request->amount;
             $phonebook->transaction_status = $request->transaction_status;
             $phonebook->transaction_type = $request->transaction_type;
-    
-            $phonebook->saveOrFail();
-            return redirect()->back();
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            // Handle the exception, for example, return a response or log it
-            return response()->json(['error' => 'No Found Record'], 404);
-        } catch (\Exception $e) {
-            // Handle other types of exceptions
-            // Log the exception or return a generic error response
-            Log::error($e->getMessage());
-            return response()->json(['error' => 'Something went wrong'], 500);
-        }
-    }
+            $phonebook->transaction_time = $request->transaction_time;
+            $phonebook->reference_code = $referenceCode;
 
+            $phonebook->saveOrFail();
+            return redirect()->back()->with('success', 'Transaction created successfully');// Generate reference code
+            $referenceCode = $this->generateReferenceCode();
+
+            // Store the form data along with the generated reference code
+            $phonebook = new Phonebook;
+            $phonebook->sender_firstname = $request->sender_firstname;
+            $phonebook->sender_lastname = $request->sender_lastname;
+            $phonebook->receiver_firstname = $request->receiver_firstname;
+            $phonebook->receiver_lastname = $request->receiver_lastname;
+            $phonebook->amount = $request->amount;
+            $phonebook->transaction_status = $request->transaction_status;
+            $phonebook->transaction_type = $request->transaction_type;
+            $phonebook->transaction_time = $request->transaction_time;
+            $phonebook->reference_code = $referenceCode;
+
+            $phonebook->saveOrFail();
+            return redirect()->back()->with('success', 'Transaction created successfully');
+        }
+        
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        // Handle the exception, for example, return a response or log it
+        Log::error('Failed to create transaction: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Failed to create transaction');
+    } catch (\Exception $e) {
+        // Handle other types of exceptions
+        // Log the exception or return a generic error response
+        Log::error('Something went wrong: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong');
+    }
+}
+
+
+    private function generateReferenceCode()
+    {
+    // Logic to generate reference code
+    // You can use the logic from your previous JavaScript function here
+    // Make sure to adjust the logic to match the PHP environment
+    // For example:
+        $systemCode = "PJJS"; // Replace with your system code
+        $formattedDate = date('Ymd'); // Format: YYYYMMDD
+        $formattedTime = date('His'); // Format: HHMMSS
+        $transactionId = mt_rand(100000, 999999); // Generate random transaction ID between 100000 and 999999
+        $randomValue = mt_rand(0, 999); // Generate random value between 0 and 999
+
+        // Construct the reference code
+        $referenceCode = $systemCode . '-' . $formattedDate . '-' . $formattedTime . '-' . $transactionId . '-' . $randomValue;
+
+        return $referenceCode;
+    }
     /**
      * Display the specified resource.
      */
