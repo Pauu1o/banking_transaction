@@ -220,9 +220,8 @@
                                     {{ Auth::user()->name }}
                                 </div>
                                 <div class="text-white text-lg">Europe Standard Time</div>
-                                    <div id="clock" class="text-6xl font-bold text-danger-600"></div>
-                                        <div class="text-danger-600 py-4 font-bold text-2xl"> 1 € (Euro) = 60.70 ₱ (Philippine Peso)</div>                                  
-                                            <div class="text-white"> as of 05/03/2024</div>
+                                    <div id="clock" class="text-6xl py-4 font-bold text-danger-600"></div>
+                                    <div class="text-danger-600 py-4 font-bold text-2xl">1 EUR = <span id="converted-price"></span> PHP</div>
                                              
                         </div>
 
@@ -252,10 +251,32 @@
                             
                                 startTime(); // Start the clock immediately
                             </script>
+                            
+                            <!-- Conversion API -->
+                            <script>
+                                const API_KEY = '52b74f0f831e0aa311149335';
+                                const req_url = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/EUR`;
+
+                                // Fetch data from the API
+                                fetch(req_url)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // Check if API request was successful
+                                        if (data.result === 'success') {
+                                            const base_price = 1; // Your price in EUR
+                                            const PHP_price = (base_price * data.conversion_rates.PHP).toFixed(2);
+
+                                            // Update the UI with the converted price
+                                            document.getElementById('converted-price').innerText = PHP_price;
+                                        } else {
+                                            console.error('Failed to fetch exchange rates:', data.error);
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error fetching exchange rates:', error);
+                                    });
+                            </script>
                         </div>
-
-                        
-
                     </div>
                    
 
