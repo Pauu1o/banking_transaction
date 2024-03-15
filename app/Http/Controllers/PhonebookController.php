@@ -22,11 +22,23 @@ class PhonebookController extends Controller
             $sentTransactions = Phonebook::where('sender_firstname', Auth::user()->first_name)
                 ->orWhere('receiver_firstname', Auth::user()->first_name)
                 ->where('sender_lastname', Auth::user()->last_name)
-                ->orWhere('receiver_lastname', Auth::user()->last_name)
-                ->get();
-    
-            return view('phonebook.index', compact('sentTransactions'));
+                ->orWhere('receiver_lastname', Auth::user()->last_name);
+                //->get();
+        };
+
+        
+        $sentTransactions = $sentTransactions->get();
+        return view('phonebook.index', compact('sentTransactions'));
+    }
+
+    public function filter(Request $request){
+        if ($request->filled('reference_code')) {
+            // Filter transactions by reference code
+            $sentTransactions = Phonebook::where('reference_code', $request->input('reference_code'));   
         }
+
+        $sentTransactions = $sentTransactions->get();
+        return view('phonebook.index', compact('sentTransactions'));
     }
 
     /**
@@ -114,7 +126,7 @@ class PhonebookController extends Controller
     // You can use the logic from your previous JavaScript function here
     // Make sure to adjust the logic to match the PHP environment
     // For example:
-        $systemCode = "PJJS"; // Replace with your system code
+        $systemCode = "PJJV"; // Replace with your system code
         $formattedDate = date('Ymd'); // Format: YYYYMMDD
         $formattedTime = date('His'); // Format: HHMMSS
         $transactionId = mt_rand(100000, 999999); // Generate random transaction ID between 100000 and 999999

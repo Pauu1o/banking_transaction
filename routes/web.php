@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Phonebook;
-
+use App\Http\Controllers\PhonebookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +14,10 @@ use App\Models\Phonebook;
 |
 */
 // Route definition in Laravel
+Route::get('/phonebook', [PhonebookController::class, 'index'])->name('phonebook.index');
+
+Route::get('/phonebook/filter', [PhonebookController::class, 'filter'])->name('phonebook.filter');
+
 Route::get('/transactions', function () {
     $referenceCode = request()->input('reference_code');
     

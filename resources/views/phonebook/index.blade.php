@@ -235,7 +235,7 @@
                                 const createTransactionButton = document.querySelector('button[type="submit"]');
                                 
                                 createTransactionButton.addEventListener('click', setTransactionTime);
-
+                                
                                 function setTransactionTime() {
                                     console.log("Setting transaction time...");
                                     const now = new Date();
@@ -302,9 +302,16 @@
 
                    <!-- Seperator -->
                         <hr class="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:opacity-100" />
-                            
-                        <!-- TABLE -->
+                        
+                        <!-- SEARCH BAR -->
+                        <div class="flex justify-between mb-4">
+                            <form action="{{ route('phonebook.filter') }}" method="GET" class="w-1/3">
+                            <input type="text" name="reference_code" id="searchInput" class="w-full p-2 border rounded" placeholder="Search by Reference Code...">
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
+                            </form>
+                        </div>
 
+                        <!-- TABLE -->
                         <table
                             class="min-w-full text-center text-sm font-light dark:border-neutral-500 ">
                                 <thead class=" font-medium text-white dark:border-neutral-500 dark:bg-neutral-600">
