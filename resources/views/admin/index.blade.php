@@ -78,6 +78,11 @@
                                         <th
                                             scope="col"
                                             class="border-r px-6 py-4 dark:border-neutral-500">
+                                            Branch
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-6 py-4 dark:border-neutral-500">
                                             Reference Code
                                         </th>
                                         <th scope="col" class="px-6 py-4 rounded-tr-[1.5rem]">Time</th>
@@ -118,6 +123,11 @@
                                         <span>{{ $phonebook->transaction_type }}</span>
                                         <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editTransactionType(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
                                         <input type="text" class="hidden transaction_type flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->transaction_type }}" style="z-index: -1;">
+                                    </td>
+                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
+                                        <span>{{ $phonebook->branch }}</span>
+                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editBranch(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <input type="text" class="hidden branch flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->branch }}" style="z-index: -1;">
                                     </td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->reference_code }}</td>
                                     <td class="px-6 py-4">{{ $phonebook->transaction_time }}</td>
@@ -373,6 +383,45 @@
                                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                             },
                                             body: JSON.stringify({transaction_type: newTransactionType })
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Failed to update receiver name');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        console.log("Receiver Name updated successfully");
+                                    })
+                                    .catch(error => {
+                                        console.error('Error updating receiver name: ', error);
+                                    });
+                                }
+                            });
+                        }
+
+                        function editBranch(button) {
+                                const row = button.parentNode;
+                                const inputField = row.querySelector('.branch');
+                                inputField.classList.remove('hidden');
+                                button.style.display = 'none';
+
+                                inputField.focus();
+
+                                inputField.addEventListener('keydown', function(event) {
+                                    if (event.key == 'Enter') {
+                                        const newBranch = inputField.value;
+                                        row.querySelector('span').innerText = newBranch;
+                                        inputField.classList.add('hidden');
+                                        button.style.display = 'block';
+                                        const phonebookId = button.dataset.phonebookId;
+                                        fetch('/phonebook/' + phonebookId, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                            },
+                                            body: JSON.stringify({branch: newBranch })
                                     })
                                     .then(response => {
                                         if (!response.ok) {

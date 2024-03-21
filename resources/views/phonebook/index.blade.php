@@ -179,8 +179,8 @@
                                  
                         <div class="relative mb-6">
                                 <select
-                                    id="transaction_type"
-                                    name="transaction_type"
+                                    id="branch"
+                                    name="branch"
                                     class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                 >
                                     <option value="1">1</option>
@@ -380,61 +380,36 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($sentTransactions as $cont)
-                                        <tr class="border-b bg-white dark:border-neutral-500 ease-in-out text-small hover:bg-neutral-100">
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
-                                            {{ $cont->sender_firstname }} {{ $cont->sender_lastname }}
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->receiver_firstname }} {{ $cont->receiver_lastname }}
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->amount }} 
-                                            <br>
+                                        @if ($cont->transaction_type == 'Local')
+                                            <tr class="border-b bg-white dark:border-neutral-500 ease-in-out text-small hover:bg-neutral-100">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
+                                                {{ $cont->sender_firstname }} {{ $cont->sender_lastname }}
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                {{ $cont->receiver_firstname }} {{ $cont->receiver_lastname }}
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                {{ $cont->amount }} 
+                                                <br>
                                          
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->transaction_status }} 
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->transaction_type }} 
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
-                                            {{ $cont->reference_code }} 
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
-                                            {{ $cont->reference_code }} 
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
-                                            {{ $cont->transaction_time }} 
-                                            <br>
-                                            
-                                            
-                                            <!-- Delete -->
-                                            <!-- <td
-                                                class="whitespace-nowrap  border-r px-6 py-4 dark:border-neutral-500 ">
-                                                <a href="{{ route('phonebook.edit', ['id' => $cont->id] ) }}"
-                                                    class="text-indigo-600 hover:text-indigo-900">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                    </svg>
-                                                </a>
-                                            </td>
-                                            <td
-                                                class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500  ">
-                                                <form action="{{ route('phonebook.delete',$cont->id) }}" method="GET" onsubmit="return confirm('{{ trans('Are you sure you want to delete this ? ') }}');">
-                                                    @csrf
-                                                    <button type="submit" class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="w-6 h-6 text-red-600 hover:text-red-800 cursor-pointer" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                    </svg>
-                                                </button>
-                                                </form>
-                                            </td> -->
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                {{ $cont->transaction_status }} 
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                {{ $cont->transaction_type }} 
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                {{ $cont->branch }} 
+                                                <br>
+                                
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                                {{ $cont->reference_code }} 
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                                {{ $cont->transaction_time }} 
+                                                <br>
                                         </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
@@ -496,63 +471,38 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($sentTransactions as $cont)
-                                        <tr class="border-b bg-white dark:border-neutral-500 ease-in-out text-small hover:bg-neutral-100">
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
-                                            {{ $cont->sender_firstname }} {{ $cont->sender_lastname }}
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->receiver_firstname }} {{ $cont->receiver_lastname }}
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->amount }} 
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->amount*61.01 }} 
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->transaction_status }} 
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->transaction_type }} 
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
-                                            {{ $cont->reference_code }} 
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
-                                            {{ $cont->reference_code }} 
-                                            <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
-                                            {{ $cont->transaction_time }} 
-                                            <br>
-                                            
-                                            
-                                            <!-- Delete -->
-                                            <!-- <td
-                                                class="whitespace-nowrap  border-r px-6 py-4 dark:border-neutral-500 ">
-                                                <a href="{{ route('phonebook.edit', ['id' => $cont->id] ) }}"
-                                                    class="text-indigo-600 hover:text-indigo-900">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                    </svg>
-                                                </a>
-                                            </td>
-                                            <td
-                                                class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500  ">
-                                                <form action="{{ route('phonebook.delete',$cont->id) }}" method="GET" onsubmit="return confirm('{{ trans('Are you sure you want to delete this ? ') }}');">
-                                                    @csrf
-                                                    <button type="submit" class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="w-6 h-6 text-red-600 hover:text-red-800 cursor-pointer" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                    </svg>
-                                                </button>
-                                                </form>
-                                            </td> -->
+                                        @if ($cont->transaction_type == 'International')
+                                            <tr class="border-b bg-white dark:border-neutral-500 ease-in-out text-small hover:bg-neutral-100">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
+                                                {{ $cont->sender_firstname }} {{ $cont->sender_lastname }}
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                {{ $cont->receiver_firstname }} {{ $cont->receiver_lastname }}
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                {{ $cont->amount }} 
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                {{ $cont->amount*60}} 
+                                                <br>
+                                         
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                {{ $cont->transaction_status }} 
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                {{ $cont->transaction_type }} 
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                                {{ $cont->branch}} 
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                                {{ $cont->reference_code }} 
+                                                <br>
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                                {{ $cont->transaction_time }} 
+                                                <br>
                                         </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>

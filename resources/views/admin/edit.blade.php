@@ -57,6 +57,17 @@
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
 
+        <h2>Edit Branch</h2>
+        <form method="POST" action="{{ route('phonebook.update', $phonebook->id) }}">
+            @csrf
+            @method('PUT')
+            <div class="form-group">
+                <label for="branch">Branch:</label>
+                <input type="text" class="form-control" id="branch" name="branch" value="{{ $phonebook->branch }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+
         <h2>Edit Transaction Type</h2>
         <form method="POST" action="{{ route('phonebook.update', $phonebook->id) }}">
             @csrf

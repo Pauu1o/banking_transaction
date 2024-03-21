@@ -68,6 +68,7 @@ class PhonebookController extends Controller
         'amount' => 'required',
         'transaction_status' => 'required',
         'transaction_type' => 'required',
+        'branch' => 'required',
         'transaction_time' => 'required',
     ]);
 
@@ -78,7 +79,6 @@ class PhonebookController extends Controller
                 ->first();
 
         if ($receiver){
-            // Generate reference code
             $referenceCode = $this->generateReferenceCode();
 
             // Store the form data along with the generated reference code
@@ -91,22 +91,7 @@ class PhonebookController extends Controller
             $phonebook->transaction_status = $request->transaction_status;
             $phonebook->transaction_type = $request->transaction_type;
             $phonebook->transaction_time = $request->transaction_time;
-            $phonebook->reference_code = $referenceCode;
-
-            $phonebook->saveOrFail();
-            return redirect()->back()->with('success', 'Transaction created successfully');// Generate reference code
-            $referenceCode = $this->generateReferenceCode();
-
-            // Store the form data along with the generated reference code
-            $phonebook = new Phonebook;
-            $phonebook->sender_firstname = $request->sender_firstname;
-            $phonebook->sender_lastname = $request->sender_lastname;
-            $phonebook->receiver_firstname = $request->receiver_firstname;
-            $phonebook->receiver_lastname = $request->receiver_lastname;
-            $phonebook->amount = $request->amount;
-            $phonebook->transaction_status = $request->transaction_status;
-            $phonebook->transaction_type = $request->transaction_type;
-            $phonebook->transaction_time = $request->transaction_time;
+            $phonebook->branch = $request->branch;
             $phonebook->reference_code = $referenceCode;
 
             $phonebook->saveOrFail();
@@ -194,6 +179,7 @@ public function update(Request $request, $id) : RedirectResponse
             'receiver_lastname' => 'sometimes|required|string|max:255',
             'transaction_status' => 'sometimes|required|string|max:255',
             'transaction_type' => 'sometimes|required|string|max:255',
+            'branch' => 'sometimes|required|string|max:255',
         ]);
 
         // Update the fields with the new values if they are provided in the request
@@ -219,6 +205,10 @@ public function update(Request $request, $id) : RedirectResponse
 
         if(isset($validatedData['transaction_type'])) {
             $phonebook->transaction_type = $validatedData['transaction_type'];
+        }
+
+        if(isset($validatedData['branch'])) {
+            $phonebook->branch = $validatedData['branch'];
         }
 
         // Save the changes to the database
