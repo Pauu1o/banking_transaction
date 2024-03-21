@@ -6,7 +6,7 @@
 <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div class="flex flex-col">
-            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">         
+            <div class=" sm:-mx-6 lg:-mx-8">         
                 <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
 
                     <!-- Input transaction -->
@@ -41,7 +41,7 @@
                         <form method="POST" action="{{ route('phonebook.store') }}">
                         @csrf <!-- {{ csrf_field() }} -->
 
-                        <div class="grid grid-cols-2 gap-6">
+                        <div class="grid grid-cols-2 gap-2">
                                 
                             <!--Sender First name input-->
                             <div class="relative mb-6">
@@ -58,7 +58,7 @@
                                 >Sender First Name
                                 </label>
                                 <style>
-                                    #firstname:not(:placeholder-shown) + label {
+                                    #sender_firstname:not(:placeholder-shown) + label {
                                         display: none;
                                         }
                                 </style>
@@ -80,7 +80,7 @@
                                 >Sender Last Name
                                 </label>
                                 <style>
-                                    #lastname:not(:placeholder-shown) + label {
+                                    #sender_lastname:not(:placeholder-shown) + label {
                                         display: none;
                                         }
                                 </style>
@@ -88,7 +88,7 @@
                         </div>
                         
                         <!-- Receiver Name Portion -->
-                        <div class="grid grid-cols-2 gap-6">
+                        <div class="grid grid-cols-2 gap-2">
                                 
                             <!--Receiver First name input-->
                             <div class="relative mb-6">
@@ -105,7 +105,7 @@
                                 >Receiver First Name
                                 </label>
                                 <style>
-                                    #firstname:not(:placeholder-shown) + label {
+                                    #receiver_firstname:not(:placeholder-shown) + label {
                                         display: none;
                                         }
                                 </style>
@@ -127,34 +127,15 @@
                                 >Receiver Last Name
                                 </label>
                                 <style>
-                                    #lastname:not(:placeholder-shown) + label {
+                                    #receiver_lastname:not(:placeholder-shown) + label {
                                         display: none;
                                         }
                                 </style>
                             </div>
                         </div>
                             
-                                    
-                            <!-- Amount Number in PhP -->
-                            <div class="relative mb-6" >
-                            <input
-                                type="text"
-                                class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem]  leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="amount"
-                                name="amount"
-                                placeholder="amount" />
-                            <label
-                                for="amount"
-                                class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
-                                >Amount
-                            </label>
-                            <style>
-                                    #phonenumber:not(:placeholder-shown) + label {
-                                        display: none;
-                                        }
-                                </style>
-                            </div>
-                            
+                           
+                        <div class="grid grid-cols-2 gap-2">   
                             <!-- Drop Down for Transaction Status -->
                             <div class="relative mb-6">
                                 <select
@@ -188,18 +169,48 @@
                                     <option value="International">International</option>
                                     
                                 </select>
+                                
+                            </div>
 
-                            <style>
-                                    #phonenumber:not(:placeholder-shown) + label {
-                                        display: none;
-                                        }
-                                </style>
-
+                            
+                            
+                            <input type="hidden" name="transaction_time" id="transaction_time">
+                        </div>
+                                 
+                        <div class="relative mb-6">
+                                <select
+                                    id="transaction_type"
+                                    name="transaction_type"
+                                    class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    
+                                </select>
                                 
                             </div>
                             
-                            <input type="hidden" name="transaction_time" id="transaction_time">
-
+                            <!-- Amount Number in PhP -->
+                            <div class="relative mb-6" >
+                            <input
+                                type="text"
+                                class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem]  leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                id="amount"
+                                name="amount"
+                                placeholder="amount" />
+                            <label
+                                for="amount"
+                                class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
+                                >Amount
+                            </label>
+                            <style>
+                                    #amount:not(:placeholder-shown) + label {
+                                        display: none;
+                                        }
+                                </style>
+                            </div>
+                            
                             <!--Submit button-->
                             <button
                                 type="submit"
@@ -315,11 +326,16 @@
                                 </div>
                             </form>
                                 
-                        </div>
+                        </div>                         
+                    </div>
+                </div>
+            </div>
 
-                        <!-- TABLE -->
-                        <table
-                            class="min-w-full text-center text-sm font-light dark:border-neutral-500 ">
+            <div class="flex justify-center mb-4 font-bold text-white">LOCAL TRANSACTION</div>
+            <!-- TABLE FOR LOCAL -->
+                        <div class="overflow-x-auto max-w-7xl mx-auto">
+                            <table
+                            class="min-w-full text-center text-sm font-light dark:border-neutral-500 mx-auto ">
                                 <thead class=" font-small text-white dark:border-neutral-500 dark:bg-neutral-600">
                                     <tr>
                                         <th
@@ -334,30 +350,35 @@
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500 ">
+                                            class="border-r px-3 py-2 dark:border-neutral-500 ">
                                             Amount (Pesos) 
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
                                             Amount (Euro)
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
                                             Transaction Status
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
                                             Transaction Type
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            Branch
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
                                             Reference Code
                                         </th>
-                                        <th scope="col" class="px-6 py-4 rounded-tr-[1.5rem]">Time</th>
+                                        <th scope="col" class="px-3 py-2 rounded-tr-[1.5rem]">Time</th>
                                         
                                     </tr>
                                 </thead>
@@ -381,6 +402,9 @@
                                             <br>
                                             <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
                                             {{ $cont->transaction_type }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                            {{ $cont->reference_code }} 
                                             <br>
                                             <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
                                             {{ $cont->reference_code }} 
@@ -420,10 +444,126 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        </div>
+                        
+                                                <!-- Seperator -->
+                            <hr class="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:opacity-100" />
+                        
+                            <div class="flex justify-center mb-4 font-bold text-white">INTERNATIONAL TRANSACTION</div>
+                         <!-- TABLE FOR INTERNATIONAL -->
+                         <div class="overflow-x-auto max-w-7xl mx-auto ">
+                            <table
+                            class="min-w-full text-center text-sm font-light dark:border-neutral-500 mx-auto ">
+                                <thead class=" font-small text-white dark:border-neutral-500 dark:bg-neutral-600">
+                                    <tr>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-3 py-2 dark:border-neutral-500 rounded-tl-[1.5rem]">
+                                            Sender Name
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            Receiver Name
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-3 py-2 dark:border-neutral-500 ">
+                                            Amount (Pesos) 
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            Amount (Euro)
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            Transaction Status
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            Transaction Type
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            Branch
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            Reference Code
+                                        </th>
+                                        <th scope="col" class="px-3 py-2 rounded-tr-[1.5rem]">Time</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($sentTransactions as $cont)
+                                        <tr class="border-b bg-white dark:border-neutral-500 ease-in-out text-small hover:bg-neutral-100">
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
+                                            {{ $cont->sender_firstname }} {{ $cont->sender_lastname }}
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->receiver_firstname }} {{ $cont->receiver_lastname }}
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->amount }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->amount }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->transaction_status }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            {{ $cont->transaction_type }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                            {{ $cont->reference_code }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                            {{ $cont->reference_code }} 
+                                            <br>
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                            {{ $cont->transaction_time }} 
+                                            <br>
+                                            
+                                            
+                                            <!-- Delete -->
+                                            <!-- <td
+                                                class="whitespace-nowrap  border-r px-6 py-4 dark:border-neutral-500 ">
+                                                <a href="{{ route('phonebook.edit', ['id' => $cont->id] ) }}"
+                                                    class="text-indigo-600 hover:text-indigo-900">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                            <td
+                                                class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500  ">
+                                                <form action="{{ route('phonebook.delete',$cont->id) }}" method="GET" onsubmit="return confirm('{{ trans('Are you sure you want to delete this ? ') }}');">
+                                                    @csrf
+                                                    <button type="submit" class="flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="w-6 h-6 text-red-600 hover:text-red-800 cursor-pointer" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </button>
+                                                </form>
+                                            </td> -->
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+        </div>   
     </div>
 </main>
 
