@@ -353,11 +353,7 @@
                                             class="border-r px-3 py-2 dark:border-neutral-500 ">
                                             Amount (Pesos) 
                                         </th>
-                                        <th
-                                            scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
-                                            Amount (Euro)
-                                        </th>
+                                      
                                         <th
                                             scope="col"
                                             class="border-r px-3 py-2 dark:border-neutral-500">
@@ -394,9 +390,7 @@
                                             <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
                                             {{ $cont->amount }} 
                                             <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->amount }} 
-                                            <br>
+                                         
                                             <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
                                             {{ $cont->transaction_status }} 
                                             <br>
@@ -513,7 +507,7 @@
                                             {{ $cont->amount }} 
                                             <br>
                                             <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
-                                            {{ $cont->amount }} 
+                                            {{ $cont->amount*61.01 }} 
                                             <br>
                                             <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
                                             {{ $cont->transaction_status }} 
