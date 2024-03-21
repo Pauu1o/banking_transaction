@@ -84,14 +84,12 @@
                                         <span>{{ $phonebook->sender_firstname }} </span>
                                         <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none focus:bg-blue-600" onclick="editSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
                                         <input type="text" class="hidden flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->sender_firstname }}" style="z-index: -1;">
+                                    </td>     
+                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
+                                        <span>{{ $phonebook->receiver_firstname }} {{ $phonebook->receiver_lastname}}</span>
+                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editReceiverName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <input type="text" class="hidden flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->receiver_firstname }}" style="z-index: -1;">
                                     </td>
-                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-1 dark:border-neutral-500 relative">
-                                        <span>{{ $phonebook->sender_lastname }}</span>
-                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none focus:bg-blue-600" onclick="editSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
-                                        <input type="text" class="hidden flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->sender_firstname }}" style="z-index: -1;">
-                                    </td>
-                                    <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount }}</td>                                  
-                                    <td class="border-r px-3 py-2 dark:border-neutral-500">{{ $phonebook->receiver_firstname }} {{ $phonebook->receiver_lastname }}</td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount }}</td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount*50 }}</td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->transaction_status }}</td>
@@ -104,6 +102,7 @@
                             </table>
 
                             <script>
+
                             function editSenderName(button) {
                                 console.log("this is being clicked");
                                 // Get the parent table row
@@ -121,9 +120,9 @@
                                 inputField.addEventListener('keydown', function(event) {
                                 if (event.key === 'Enter') {
                                     // Get the new sender name
-                                    const newSenderName = inputField.value;
+                                    const newSenderFirstName = inputField.value;
                                     // Update the displayed sender name
-                                    row.querySelector('span').innerText = newSenderName;
+                                    row.querySelector('span').innerText = newSenderFirstName;
                                     // Hide the input field
                                     inputField.classList.add('hidden');
                                     // Show the edit button again
@@ -137,7 +136,7 @@
                                             'Content-Type': 'application/json',
                                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                         },
-                                        body: JSON.stringify({ sender_name: newSenderName })
+                                        body: JSON.stringify({ sender_firstname: newSenderFirstName })
                                     })
                                     .then(response => {
                                         if (!response.ok) {
@@ -150,6 +149,45 @@
                                     })
                                     .catch(error => {
                                         console.error('Error updating sender name:', error);
+                                    });
+                                }
+                            });
+                        } 
+
+                            function editReceiverName(button) {
+                                const row = button.parentNode;
+                                const inputField = row.querySelector('input');
+                                inputField.classList.remove('hidden');
+                                button.style.display = 'none';
+
+                                inputField.focus();
+
+                                inputField.addEventListener('keydown', function(event) {
+                                    if (event.key == 'Enter') {
+                                        const newReceiverFirstName = inputField.value;
+                                        row.querySelector('span').innerText = newReceiverFirstName;
+                                        inputField.classList.add('hidden');
+                                        button.style.display = 'block';
+                                        const phonebookId = button.dataset.phonebookId;
+                                        fetch('/phonebook/' + phonebookId, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                            },
+                                            body: JSON.stringify({receiver_firstname: newReceiverFirstName })
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Failed to update receiver name');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        console.log("Receiver Name updated successfully");
+                                    })
+                                    .catch(error => {
+                                        console.error('Error updating receiver name: ', error);
                                     });
                                 }
                             });
