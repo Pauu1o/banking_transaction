@@ -8,8 +8,8 @@
     @vite('resources/js/app.js')
 </head>
 <body>
-    @include('layouts-admin.header')
+    @include('layouts-admin.sidebar')
         @yield('content')
-    @include('layouts-admin.footer')
+
 </body>
 </html>

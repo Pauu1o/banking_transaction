@@ -21,3 +21,6 @@ body {
     background-size: 20%;
     background-color: #0e0000;
 }
+body.admin-page {
+    background-image: none;
+}

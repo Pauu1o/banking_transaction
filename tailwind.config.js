@@ -11,6 +11,7 @@ export default {
             colors: {
                 colorNav: "#0C0000",
                 colarNavRed: "#C30000",
+                SideColor: "#140000",
             },
         },
     },

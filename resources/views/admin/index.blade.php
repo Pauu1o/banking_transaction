@@ -3,18 +3,9 @@
 @section('content')
 
 
+<body class = "admin-page">
 
-
-<main class="flex">
-<aside class="bg-gray-800 text-white w-64 h-screen">
-        <!-- Sidebar content -->
-        <div class="flex flex-col h-full">
-            <!-- Your sidebar items go here -->
-        </div>
-    </aside>
-
-
-<div class="flex-1">
+<div class="ml-64 flex-1">
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div class="flex left">
             <div class="overflow-x-auto sm:-mx-2 lg:-mx-4">         
@@ -94,6 +85,6 @@
     </div>
 </div>
 </main>
-
+</body>
 
 @endsection
