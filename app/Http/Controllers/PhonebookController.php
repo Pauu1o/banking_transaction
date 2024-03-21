@@ -248,12 +248,16 @@ public function update(Request $request, $id) : RedirectResponse
     public function delete(Request $request) : RedirectResponse
     {
         try {
-            // Your code that may throw an exception
-            $phonebook = Phonebook::findOrFail($request->id);
+            // Find the phonebook record
+            $phonebook = Phonebook::findOrFail($id);
+            
+            // Delete the record
             $phonebook->delete();
-            return redirect()->back();
+    
+            // Optionally, you can return a response indicating success
+            return response()->json(['message' => 'Transaction deleted successfully']);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            // Handle the exception, for example, return a response or log it
+            // Handle the exception if the record is not found
             return response()->json(['error' => 'No Found Record'], 404);
         } catch (\Exception $e) {
             // Handle other types of exceptions
@@ -266,8 +270,26 @@ public function update(Request $request, $id) : RedirectResponse
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(phonebook $phonebook)
-    {
-        //
+    public function destroy($id)
+{
+    try {
+        // Find the phonebook record
+        $phonebook = Phonebook::findOrFail($id);
+        
+        // Delete the record
+        $phonebook->delete();
+
+        // Optionally, you can return a response indicating success
+        return response()->json(['message' => 'Transaction deleted successfully']);
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        // Handle the exception if the record is not found
+        return response()->json(['error' => 'No Found Record'], 404);
+    } catch (\Exception $e) {
+        // Handle other types of exceptions
+        // Log the exception or return a generic error response
+        Log::error($e->getMessage());
+        return response()->json(['error' => 'Something went wrong'], 500);
     }
+}
+
 }

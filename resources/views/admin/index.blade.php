@@ -81,7 +81,7 @@
                                             Reference Code
                                         </th>
                                         <th scope="col" class="px-6 py-4 rounded-tr-[1.5rem]">Time</th>
-                                        
+                                        <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -121,6 +121,9 @@
                                     </td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->reference_code }}</td>
                                     <td class="px-6 py-4">{{ $phonebook->transaction_time }}</td>
+                                    <td class="border-r px-6 py-4 dark:border-neutral-500">
+                                        <button class="text-xs bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 focus:outline-none" onclick="deleteTransaction(this)" data-phonebook-id="{{ $phonebook->id }}">Delete</button>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -385,6 +388,33 @@
                                     });
                                 }
                             });
+                        }
+
+                        function deleteTransaction(button) {
+                                if (confirm('Are you sure you want to delete this transaction?')) {
+                                    const phonebookId = button.dataset.phonebookId;
+                                    fetch('/phonebook/' + phonebookId, {
+                                        method: 'DELETE',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                        }
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Failed to delete transaction');
+                                        }
+                                        if (response.status === 200) {
+                                            button.closest('tr').remove();
+                                            console.log('Transaction deleted successfully');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error deleting transaction: ', error);
+                                    });
+                                }
+                            }
+                        
         // Add an event listener to cancel editing when Escape key is pressed
                             inputField.addEventListener('keydown', function(event) {
                                 if (event.key === 'Escape') {
@@ -394,7 +424,7 @@
                                     button.style.display = 'block';
                                 }
                             });
-                        }
+                    
                         </script>
                             
                     </div>

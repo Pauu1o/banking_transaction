@@ -67,5 +67,10 @@
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
+        <form action="{{ route('phonebook.delete', $phonebook->id) }}" method="DELETE">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete</button>
+        </form>
     </div>
 @endsection
