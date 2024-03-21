@@ -42,12 +42,19 @@
                                             class="border-r px-1 py-1 dark:border-neutral-500">
                                             Sender Last Name
                                         </th>
-                                        
+                                          
                                         <th
                                             scope="col"
                                             class="border-r px-1 py-1 dark:border-neutral-500">
-                                            Receiver Name
+                                            Receiver First Name
                                         </th>
+
+                                        <th
+                                            scope="col"
+                                            class="border-r px-1 py-1 dark:border-neutral-500">
+                                            Receiver Last Name
+                                        </th>
+
                                         <th
                                             scope="col"
                                             class="border-r px-6 py-4 dark:border-neutral-500 ">
@@ -82,18 +89,36 @@
                                 <tr class = "border-b bg-white dark:border-neutral-500 ease-in-out text-small hover:bg-neutral-100">
                                     <td class="whitespace-nowrap text-left font-bold border-r px-3 py-1 dark:border-neutral-500 relative">
                                         <span>{{ $phonebook->sender_firstname }} </span>
-                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none focus:bg-blue-600" onclick="editSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
-                                        <input type="text" class="hidden flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->sender_firstname }}" style="z-index: -1;">
-                                    </td>     
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none focus:bg-blue-600" onclick="editFirstSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
+                                        <input type="text" class="hidden sender-input flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->sender_firstname }}" style="z-index: -1;">
+                                    </td> 
+                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-1 dark:border-neutral-500 relative">
+                                        <span>{{ $phonebook->sender_lastname }} </span>
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none focus:bg-blue-600" onclick="editLastSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
+                                        <input type="text" class="hidden sender-input flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->sender_lastname }}" style="z-index: -1;">
+                                    </td>         
                                     <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
-                                        <span>{{ $phonebook->receiver_firstname }} {{ $phonebook->receiver_lastname}}</span>
-                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editReceiverName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
-                                        <input type="text" class="hidden flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->receiver_firstname }}" style="z-index: -1;">
+                                        <span>{{ $phonebook->receiver_firstname }}</span>
+                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editFirstReceiverName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <input type="text" class="hidden receiver-input flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->receiver_firstname }}" style="z-index: -1;">
+                                    </td>
+                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
+                                        <span>{{ $phonebook->receiver_lastname}}</span>
+                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editLastReceiverName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <input type="text" class="hidden receiver-input flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->receiver_lastname }}" style="z-index: -1;">
                                     </td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount }}</td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount*50 }}</td>
-                                    <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->transaction_status }}</td>
-                                    <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->transaction_type }}</td>
+                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
+                                        <span>{{ $phonebook->transaction_status }}</span>
+                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editTransactionStatus(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <input type="text" class="hidden transaction_status_input flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->transaction_status }}" style="z-index: -1;">
+                                    </td>
+                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
+                                        <span>{{ $phonebook->transaction_type }}</span>
+                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editTransactionType(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <input type="text" class="hidden transaction_type flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->transaction_type }}" style="z-index: -1;">
+                                    </td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->reference_code }}</td>
                                     <td class="px-6 py-4">{{ $phonebook->transaction_time }}</td>
                                 </tr>
@@ -103,12 +128,12 @@
 
                             <script>
 
-                            function editSenderName(button) {
+                            function editFirstSenderName(button) {
                                 console.log("this is being clicked");
                                 // Get the parent table row
                                 const row = button.parentNode;
                                 // Get the input field and make it visible
-                                const inputField = row.querySelector('input');
+                                const inputField = row.querySelector('.sender-input');
                                 inputField.classList.remove('hidden');
                                 // Hide the edit button
                                 button.style.display = 'none';
@@ -154,9 +179,60 @@
                             });
                         } 
 
-                            function editReceiverName(button) {
+                        function editLastSenderName(button) {
+                                console.log("this is being clicked");
+                                // Get the parent table row
                                 const row = button.parentNode;
-                                const inputField = row.querySelector('input');
+                                // Get the input field and make it visible
+                                const inputField = row.querySelector('.sender-input');
+                                inputField.classList.remove('hidden');
+                                // Hide the edit button
+                                button.style.display = 'none';
+
+                                // Focus on the input field
+                                inputField.focus();
+
+                                // Add an event listener to save changes when Enter key is pressed
+                                inputField.addEventListener('keydown', function(event) {
+                                if (event.key === 'Enter') {
+                                    // Get the new sender name
+                                    const newSenderLastName = inputField.value;
+                                    // Update the displayed sender name
+                                    row.querySelector('span').innerText = newSenderLastName;
+                                    // Hide the input field
+                                    inputField.classList.add('hidden');
+                                    // Show the edit button again
+                                    button.style.display = 'block';
+                                    // Optionally, you can send an AJAX request here to update the sender name in the database
+                                    // Example AJAX request using Fetch API:
+                                    const phonebookId = button.dataset.phonebookId;
+                                    fetch('/phonebook/' + phonebookId, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                        },
+                                        body: JSON.stringify({ sender_lastname: newSenderLastName })
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Failed to update sender name');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        console.log('Sender name updated successfully');
+                                    })
+                                    .catch(error => {
+                                        console.error('Error updating sender name:', error);
+                                    });
+                                }
+                            });
+                        } 
+
+                            function editFirstReceiverName(button) {
+                                const row = button.parentNode;
+                                const inputField = row.querySelector('.receiver-input');
                                 inputField.classList.remove('hidden');
                                 button.style.display = 'none';
 
@@ -189,9 +265,126 @@
                                     .catch(error => {
                                         console.error('Error updating receiver name: ', error);
                                     });
+                                
                                 }
                             });
+                        }
 
+                            function editLastReceiverName(button) {
+                                const row = button.parentNode;
+                                const inputField = row.querySelector('.receiver-input');
+                                inputField.classList.remove('hidden');
+                                button.style.display = 'none';
+
+                                inputField.focus();
+
+                                inputField.addEventListener('keydown', function(event) {
+                                    if (event.key == 'Enter') {
+                                        const newReceiverLastName = inputField.value;
+                                        row.querySelector('span').innerText = newReceiverLastName;
+                                        inputField.classList.add('hidden');
+                                        button.style.display = 'block';
+                                        const phonebookId = button.dataset.phonebookId;
+                                        fetch('/phonebook/' + phonebookId, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                            },
+                                            body: JSON.stringify({receiver_lastname: newReceiverLastName })
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Failed to update receiver name');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        console.log("Receiver Name updated successfully");
+                                    })
+                                    .catch(error => {
+                                        console.error('Error updating receiver name: ', error);
+                                    });
+                                }
+                            });
+                        }
+
+                            function editTransactionStatus(button) {
+                                const row = button.parentNode;
+                                const inputField = row.querySelector('.transaction_status_input');
+                                inputField.classList.remove('hidden');
+                                button.style.display = 'none';
+
+                                inputField.focus();
+
+                                inputField.addEventListener('keydown', function(event) {
+                                    if (event.key == 'Enter') {
+                                        const newTransactionStatus = inputField.value;
+                                        row.querySelector('span').innerText = newTransactionStatus;
+                                        inputField.classList.add('hidden');
+                                        button.style.display = 'block';
+                                        const phonebookId = button.dataset.phonebookId;
+                                        fetch('/phonebook/' + phonebookId, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                            },
+                                            body: JSON.stringify({transaction_status: newTransactionStatus })
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Failed to update receiver name');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        console.log("Receiver Name updated successfully");
+                                    })
+                                    .catch(error => {
+                                        console.error('Error updating receiver name: ', error);
+                                    });
+                                }
+                            });
+                        }
+
+                            function editTransactionType(button) {
+                                const row = button.parentNode;
+                                const inputField = row.querySelector('.transaction_type');
+                                inputField.classList.remove('hidden');
+                                button.style.display = 'none';
+
+                                inputField.focus();
+
+                                inputField.addEventListener('keydown', function(event) {
+                                    if (event.key == 'Enter') {
+                                        const newTransactionType = inputField.value;
+                                        row.querySelector('span').innerText = newTransactionType;
+                                        inputField.classList.add('hidden');
+                                        button.style.display = 'block';
+                                        const phonebookId = button.dataset.phonebookId;
+                                        fetch('/phonebook/' + phonebookId, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                            },
+                                            body: JSON.stringify({transaction_type: newTransactionType })
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Failed to update receiver name');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        console.log("Receiver Name updated successfully");
+                                    })
+                                    .catch(error => {
+                                        console.error('Error updating receiver name: ', error);
+                                    });
+                                }
+                            });
         // Add an event listener to cancel editing when Escape key is pressed
                             inputField.addEventListener('keydown', function(event) {
                                 if (event.key === 'Escape') {

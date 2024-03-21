@@ -175,26 +175,75 @@ class PhonebookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Phonebook $phonebook) : RedirectResponse
-    {
+    /**
+ * Update the specified resource in storage.
+ */
+public function update(Request $request, $id) : RedirectResponse
+{
+    Log::info('Update method called.');
 
-        try {
-            // Your code that may throw an exception
-            $phonebook = Phonebook::findOrFail($request->id);
-            $phonebook->update([
-                'sender_firstname' => $request->input('sender_firstname')
-            ]);
-            return redirect()->route('admin.page')->with('success', 'Transaction Sender Name updated successfully');
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            // Handle the exception, for example, return a response or log it
-            return response()->json(['error' => 'No Found Record'], 404);
-        } catch (\Exception $e) {
-            // Handle other types of exceptions
-            // Log the exception or return a generic error response
-            Log::error($e->getMessage());
-            return response()->json(['error' => 'Something went wrong'], 500);
+    try {
+        // Find the phonebook record
+        $phonebook = Phonebook::findOrFail($id);
+        
+        // Validate the request data
+        $validatedData = $request->validate([
+            'sender_firstname' => 'sometimes|required|string|max:255',
+            'sender_lastname' => 'sometimes|required|string|max:255',
+            'receiver_firstname' => 'sometimes|required|string|max:255',
+            'receiver_lastname' => 'sometimes|required|string|max:255',
+            'transaction_status' => 'sometimes|required|string|max:255',
+            'transaction_type' => 'sometimes|required|string|max:255',
+        ]);
+
+        // Update the fields with the new values if they are provided in the request
+        if (isset($validatedData['sender_firstname'])) {
+            $phonebook->sender_firstname = $validatedData['sender_firstname'];
         }
+
+        if (isset($validatedData['sender_lastname'])) {
+            $phonebook->sender_lastname = $validatedData['sender_lastname'];
+        }
+
+        if (isset($validatedData['receiver_firstname'])) {
+            $phonebook->receiver_firstname = $validatedData['receiver_firstname'];
+        }
+
+        if (isset($validatedData['receiver_lastname'])) {
+            $phonebook->receiver_lastname = $validatedData['receiver_lastname'];
+        }
+
+        if(isset($validatedData['transaction_status'])) {
+            $phonebook->transaction_status = $validatedData['transaction_status'];
+        }
+
+        if(isset($validatedData['transaction_type'])) {
+            $phonebook->transaction_type = $validatedData['transaction_type'];
+        }
+
+        // Save the changes to the database
+        $phonebook->save();
+
+        // Redirect back to the admin page with success message
+        return redirect()->route('admin.page')->with('success', 'Transaction updated successfully');
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        // Log validation errors
+        Log::error('Validation failed: ' . $e->getMessage());
+
+        // Redirect back with validation errors
+        return redirect()->back()->withErrors($e->errors())->withInput();
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        // Handle the exception if the record is not found
+        return response()->json(['error' => 'No Found Record'], 404);
+    } catch (\Exception $e) {
+        // Handle other types of exceptions
+        // Log the exception or return a generic error response
+        Log::error($e->getMessage());
+        return response()->json(['error' => 'Something went wrong'], 500);
     }
+}
+
+
 
     public function delete(Request $request) : RedirectResponse
     {
