@@ -44,7 +44,7 @@ class AuthenticationController extends Controller
             if ($admin) {
                 Auth::login($admin);
 
-                return redirect()->intended('admin/dashboard');
+                return redirect()->intended('admin');
 
                 //return redirect()->intended('resources/views/admin/index.blade.php');
                 return redirect()->route('admin.index');
@@ -61,7 +61,6 @@ class AuthenticationController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
 

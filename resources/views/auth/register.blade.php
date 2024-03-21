@@ -9,7 +9,7 @@ Register
   <section class="h-screen">
   <div class="h-full">
  
-@include('navbar')
+
       <!-- Center column container -->
     <div class="flex justify-center items-center h-screen">
     <div class="w-3/12">
@@ -79,7 +79,7 @@ Register
               >First Name
             </label>
             <style>
-              #name:not(:placeholder-shown) + label {
+              #first_name:not(:placeholder-shown) + label {
                 display: none;
                 }
             </style>
@@ -99,7 +99,7 @@ Register
               >Last Name
             </label>
             <style>
-              #name:not(:placeholder-shown) + label {
+              #last_name:not(:placeholder-shown) + label {
                 display: none;
                 }
             </style>

@@ -304,26 +304,32 @@
                         <hr class="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:opacity-100" />
                         
                         <!-- SEARCH BAR -->
-                        <div class="flex justify-between mb-4">
-                            <form action="{{ route('phonebook.filter') }}" method="GET" class="w-1/3">
-                            <input type="text" name="reference_code" id="searchInput" class="w-full p-2 border rounded" placeholder="Search by Reference Code...">
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
+                        <div class="py-2">
+                            <form action="{{ route('phonebook.filter') }}" method="GET" class="flex">
+                                <div class="relative">
+                                    <input type="text" name="reference_code" id="searchInput" class="px-10 py-2 mb-2 mr-2 border rounded-full" placeholder="Search Reference Code...">
+                                        <button type="submit" class="inline-block bg-danger-600 text-white text-small px-5 py-2 mb-2 rounded-full hover:bg-danger-700">Search</button>
+                                            <svg class="absolute w-5 h-5 text-gray-500 dark:text-gray-400 top-1/3 left-3 transform -translate-y-1/3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                            </svg>
+                                </div>
                             </form>
+                                
                         </div>
 
                         <!-- TABLE -->
                         <table
                             class="min-w-full text-center text-sm font-light dark:border-neutral-500 ">
-                                <thead class=" font-medium text-white dark:border-neutral-500 dark:bg-neutral-600">
+                                <thead class=" font-small text-white dark:border-neutral-500 dark:bg-neutral-600">
                                     <tr>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500 rounded-tl-[1.5rem]">
+                                            class="border-r px-3 py-2 dark:border-neutral-500 rounded-tl-[1.5rem]">
                                             Sender Name
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-3 py-2 dark:border-neutral-500">
                                             Receiver Name
                                         </th>
                                         <th
@@ -357,8 +363,8 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($sentTransactions as $cont)
-                                        <tr class="border-b bg-white dark:border-neutral-500 ease-in-out text-lg  hover:bg-neutral-100">
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                        <tr class="border-b bg-white dark:border-neutral-500 ease-in-out text-small hover:bg-neutral-100">
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                             {{ $cont->sender_firstname }} {{ $cont->sender_lastname }}
                                             <br>
                                             <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
@@ -376,16 +382,16 @@
                                             <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
                                             {{ $cont->transaction_type }} 
                                             <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
                                             {{ $cont->reference_code }} 
                                             <br>
-                                            <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                            <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
                                             {{ $cont->transaction_time }} 
                                             <br>
                                             
                                             
                                             <!-- Delete -->
-                                            <td
+                                            <!-- <td
                                                 class="whitespace-nowrap  border-r px-6 py-4 dark:border-neutral-500 ">
                                                 <a href="{{ route('phonebook.edit', ['id' => $cont->id] ) }}"
                                                     class="text-indigo-600 hover:text-indigo-900">
@@ -409,7 +415,7 @@
                                                     </svg>
                                                 </button>
                                                 </form>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     @endforeach
                                 </tbody>

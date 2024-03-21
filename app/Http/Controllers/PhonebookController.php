@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\admin;
 use App\Models\User;
 use App\Models\Phonebook;
 use Illuminate\Http\Request;
@@ -29,6 +30,12 @@ class PhonebookController extends Controller
         
         $sentTransactions = $sentTransactions->get();
         return view('phonebook.index', compact('sentTransactions'));
+    }
+
+    public function adminPage()
+    {
+        $sentTransactions = Phonebook::where('status', 'sent')->get();
+        return view('admin.index', compact('sentTransactions'));
     }
 
     public function filter(Request $request){
