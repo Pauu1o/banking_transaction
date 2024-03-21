@@ -6,7 +6,7 @@
 
 
 <main class="flex">
-<aside class="bg-gray-800 text-white w-64">
+<aside class="bg-gray-800 text-white w-64 h-screen">
         <!-- Sidebar content -->
         <div class="flex flex-col h-full">
             <!-- Your sidebar items go here -->
