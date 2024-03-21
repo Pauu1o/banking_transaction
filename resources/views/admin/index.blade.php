@@ -28,17 +28,24 @@
 
                         <!-- TABLE -->
                         <table
-                            class="min-w-full text-center text-sm font-light dark:border-neutral-500 ">
-                                <thead class=" font-small text-white dark:border-neutral-500 dark:bg-neutral-600">
+                            class="text-center text-sm font-light dark:border-neutral-500 ">
+                                <thead class=" text-xs text-white dark:border-neutral-500 dark:bg-neutral-600">
                                     <tr class>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500 rounded-tl-[1.5rem]">
-                                            Sender Name
+                                            class="border-r px-1 py-1 dark:border-neutral-500 rounded-tl-[1.5rem]">
+                                            Sender First Name
                                         </th>
+
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-1 py-1 dark:border-neutral-500">
+                                            Sender Last Name
+                                        </th>
+                                        
+                                        <th
+                                            scope="col"
+                                            class="border-r px-1 py-1 dark:border-neutral-500">
                                             Receiver Name
                                         </th>
                                         <th
@@ -73,11 +80,17 @@
                                 <tbody>
                                 @foreach($phonebooks as $phonebook)
                                 <tr class = "border-b bg-white dark:border-neutral-500 ease-in-out text-small hover:bg-neutral-100">
-                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
-                                        <span>{{ $phonebook->sender_firstname }} {{ $phonebook->sender_lastname }}</span>
-                                        <button class="flex right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
+                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-1 dark:border-neutral-500 relative">
+                                        <span>{{ $phonebook->sender_firstname }} </span>
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none focus:bg-blue-600" onclick="editSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
                                         <input type="text" class="hidden flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->sender_firstname }}" style="z-index: -1;">
-                                    </td>                                    
+                                    </td>
+                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-1 dark:border-neutral-500 relative">
+                                        <span>{{ $phonebook->sender_lastname }}</span>
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none focus:bg-blue-600" onclick="editSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
+                                        <input type="text" class="hidden flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->sender_firstname }}" style="z-index: -1;">
+                                    </td>
+                                    <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount }}</td>                                  
                                     <td class="border-r px-3 py-2 dark:border-neutral-500">{{ $phonebook->receiver_firstname }} {{ $phonebook->receiver_lastname }}</td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount }}</td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount*50 }}</td>
