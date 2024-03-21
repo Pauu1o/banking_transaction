@@ -30,7 +30,7 @@
                         <table
                             class="min-w-full text-center text-sm font-light dark:border-neutral-500 ">
                                 <thead class=" font-small text-white dark:border-neutral-500 dark:bg-neutral-600">
-                                    <tr>
+                                    <tr class>
                                         <th
                                             scope="col"
                                             class="border-r px-3 py-2 dark:border-neutral-500 rounded-tl-[1.5rem]">
@@ -70,13 +70,88 @@
                                         
                                     </tr>
                                 </thead>
-                              
-                                            
-                                          
-                                        </tr>
-                                   
-                                </tbody>
+                                <tbody>
+                                @foreach($phonebooks as $phonebook)
+                                <tr class = "border-b bg-white dark:border-neutral-500 ease-in-out text-small hover:bg-neutral-100">
+                                    <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
+                                        <span>{{ $phonebook->sender_firstname }} {{ $phonebook->sender_lastname }}</span>
+                                        <button class="flex right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
+                                        <input type="text" class="hidden flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->sender_firstname }}" style="z-index: -1;">
+                                    </td>                                    
+                                    <td class="border-r px-3 py-2 dark:border-neutral-500">{{ $phonebook->receiver_firstname }} {{ $phonebook->receiver_lastname }}</td>
+                                    <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount }}</td>
+                                    <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount*50 }}</td>
+                                    <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->transaction_status }}</td>
+                                    <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->transaction_type }}</td>
+                                    <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->reference_code }}</td>
+                                    <td class="px-6 py-4">{{ $phonebook->transaction_time }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
                             </table>
+
+                            <script>
+                            function editSenderName(button) {
+                                console.log("this is being clicked");
+                                // Get the parent table row
+                                const row = button.parentNode;
+                                // Get the input field and make it visible
+                                const inputField = row.querySelector('input');
+                                inputField.classList.remove('hidden');
+                                // Hide the edit button
+                                button.style.display = 'none';
+
+                                // Focus on the input field
+                                inputField.focus();
+
+                                // Add an event listener to save changes when Enter key is pressed
+                                inputField.addEventListener('keydown', function(event) {
+                                if (event.key === 'Enter') {
+                                    // Get the new sender name
+                                    const newSenderName = inputField.value;
+                                    // Update the displayed sender name
+                                    row.querySelector('span').innerText = newSenderName;
+                                    // Hide the input field
+                                    inputField.classList.add('hidden');
+                                    // Show the edit button again
+                                    button.style.display = 'block';
+                                    // Optionally, you can send an AJAX request here to update the sender name in the database
+                                    // Example AJAX request using Fetch API:
+                                    const phonebookId = button.dataset.phonebookId;
+                                    fetch('/phonebook/' + phonebookId, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                        },
+                                        body: JSON.stringify({ sender_name: newSenderName })
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Failed to update sender name');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        console.log('Sender name updated successfully');
+                                    })
+                                    .catch(error => {
+                                        console.error('Error updating sender name:', error);
+                                    });
+                                }
+                            });
+
+        // Add an event listener to cancel editing when Escape key is pressed
+                            inputField.addEventListener('keydown', function(event) {
+                                if (event.key === 'Escape') {
+                                    // Hide the input field
+                                    inputField.classList.add('hidden');
+                                    // Show the edit button again
+                                    button.style.display = 'block';
+                                }
+                            });
+                        }
+                        </script>
                             
                     </div>
                 </div>

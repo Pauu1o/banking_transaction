@@ -27,16 +27,15 @@ class PhonebookController extends Controller
                 //->get();
         };
 
-        
         $sentTransactions = $sentTransactions->get();
         return view('phonebook.index', compact('sentTransactions'));
     }
 
     public function adminPage()
-    {
-        $sentTransactions = Phonebook::where('status', 'sent')->get();
-        return view('admin.index', compact('sentTransactions'));
-    }
+{
+    $phonebooks = Phonebook::all(); // Fetch all phonebook records
+    return view('admin.index', compact('phonebooks'));
+}
 
     public function filter(Request $request){
         if ($request->filled('reference_code')) {
@@ -183,11 +182,9 @@ class PhonebookController extends Controller
             // Your code that may throw an exception
             $phonebook = Phonebook::findOrFail($request->id);
             $phonebook->update([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'phone_number' => $request->phone_number,
+                'sender_firstname' => $request->input('sender_firstname')
             ]);
-            return redirect()->back();
+            return redirect()->route('admin.page')->with('success', 'Transaction Sender Name updated successfully');
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             // Handle the exception, for example, return a response or log it
             return response()->json(['error' => 'No Found Record'], 404);

@@ -18,6 +18,8 @@ Route::get('/phonebook', [PhonebookController::class, 'index'])->name('phonebook
 
 Route::get('/phonebook/filter', [PhonebookController::class, 'filter'])->name('phonebook.filter');
 
+Route::get('/admin', [PhonebookController::class, 'adminPage'])->name('admin.page');
+
 Route::get('/transactions', function () {
     $referenceCode = request()->input('reference_code');
     
@@ -28,9 +30,9 @@ Route::get('/transactions', function () {
     return response()->json($filteredTransactions);
 });
 
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin.index');
+// Route::get('/admin', function () {
+//     return view('admin.index');
+// })->name('admin.index');
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,6 +52,9 @@ Route::get('/contact', function () {
     return view('contact/content'); //path of your view file
 });
 
+Route::get('/phonebook/{id}/edit', [PhonebookController::class, 'edit'])->name('phonebook.edit');
+Route::post('/phonebook/{id}', [PhonebookController::class, 'update'])->name('phonebook.update');
+Route::delete('/phonebook/{id}', [PhonebookController::class, 'destroy'])->name('phonebook.destroy');
 
 
 
