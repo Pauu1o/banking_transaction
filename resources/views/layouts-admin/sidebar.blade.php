@@ -11,12 +11,7 @@
     <div class="flex-1 overflow-y-auto">
         <!-- Sidebar items -->
         <ul class="py-4">
-            <li class="px-6 py-2 hover:bg-danger-700">
-                <a href="#" class="block">Dashboard</a>
-            </li>
-            <li class="px-6 py-2 hover:bg-danger-700">
-                <a href="#" class="block">Messages</a>
-            </li>
+          
             <li class="px-6 py-2 hover:bg-danger-700">
     <a href="{{ route('logout') }}" 
        onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 

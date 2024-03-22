@@ -21,7 +21,7 @@
                 <a href="route('logout')" class="text-sm font-semibold leading-6 text-danger-600 hover:text-danger-700"
                         onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                    Logout <span aria-hidden="true">&rarr;</span>
+                    Logout <span aria-hiddsss="true">&rarr;</span>
                 </a>
             </form>
           </div>

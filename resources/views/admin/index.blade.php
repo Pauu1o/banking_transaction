@@ -6,7 +6,7 @@
 <body class = "admin-page">
 
 <div class="ml-64 flex-1">
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-10xl py-6 sm:px-10 lg:px-8">
         <div class="flex left">
             <div class="overflow-x-auto sm:-mx-2 lg:-mx-4">         
                 <div class="inline-block min-w-right py-2 sm:px-6 lg:px-8">
@@ -33,60 +33,66 @@
                                     <tr class>
                                         <th
                                             scope="col"
-                                            class="border-r px-1 py-1 dark:border-neutral-500 rounded-tl-[1.5rem]">
+                                            class="border-r px-4 py-3 dark:border-neutral-500 rounded-tl-[1.5rem]">
                                             Sender First Name
                                         </th>
 
                                         <th
                                             scope="col"
-                                            class="border-r px-1 py-1 dark:border-neutral-500">
+                                            class="border-r px-2 py-3 dark:border-neutral-500">
                                             Sender Last Name
                                         </th>
                                           
                                         <th
                                             scope="col"
-                                            class="border-r px-1 py-1 dark:border-neutral-500">
+                                            class="border-r px-1 py-3 dark:border-neutral-500">
                                             Receiver First Name
                                         </th>
 
                                         <th
                                             scope="col"
-                                            class="border-r px-1 py-1 dark:border-neutral-500">
+                                            class="border-r px-1 py-3 dark:border-neutral-500">
                                             Receiver Last Name
                                         </th>
 
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500 ">
+                                            class="border-r px-1 py-3 dark:border-neutral-500 ">
                                             Amount (Pesos) 
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-1 py-3 dark:border-neutral-500">
                                             Amount (Euro)
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-1 py-3 dark:border-neutral-500">
                                             Transaction Status
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-1 py-3 dark:border-neutral-500">
                                             Transaction Type
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-1 py-3 dark:border-neutral-500">
                                             Branch
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-4 dark:border-neutral-500">
+                                            class="border-r px-1 py-3 dark:border-neutral-500">
                                             Reference Code
                                         </th>
-                                        <th scope="col" class="px-6 py-4 rounded-tr-[1.5rem]">Time</th>
-                                        <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Actions</th>
+                                        <th scope="col"
+                                        class="border-r px-1 py-3 dark:border-neutral-500">
+                                        Time
+                                        </th>
+                                        <th scope="col"
+                                        class="borderl px-4 py-3 dark:border-neutral-500 rounded-tr-[1.5rem]">
+                                        Actions
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,45 +100,45 @@
                                 <tr class = "border-b bg-white dark:border-neutral-500 ease-in-out text-small hover:bg-neutral-100">
                                     <td class="whitespace-nowrap text-left font-bold border-r px-3 py-1 dark:border-neutral-500 relative">
                                         <span>{{ $phonebook->sender_firstname }} </span>
-                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none focus:bg-blue-600" onclick="editFirstSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none" onclick="editFirstSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
                                         <input type="text" class="hidden sender-input flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->sender_firstname }}" style="z-index: -1;">
                                     </td> 
                                     <td class="whitespace-nowrap text-left font-bold border-r px-3 py-1 dark:border-neutral-500 relative">
                                         <span>{{ $phonebook->sender_lastname }} </span>
-                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none focus:bg-blue-600" onclick="editLastSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none" onclick="editLastSenderName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>
                                         <input type="text" class="hidden sender-input flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->sender_lastname }}" style="z-index: -1;">
                                     </td>         
                                     <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
                                         <span>{{ $phonebook->receiver_firstname }}</span>
-                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editFirstReceiverName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none" onclick="editFirstReceiverName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
                                         <input type="text" class="hidden receiver-input flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->receiver_firstname }}" style="z-index: -1;">
                                     </td>
                                     <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
                                         <span>{{ $phonebook->receiver_lastname}}</span>
-                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editLastReceiverName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none" onclick="editLastReceiverName(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
                                         <input type="text" class="hidden receiver-input flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->receiver_lastname }}" style="z-index: -1;">
                                     </td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount }}</td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->amount*50 }}</td>
                                     <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
                                         <span>{{ $phonebook->transaction_status }}</span>
-                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editTransactionStatus(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none" onclick="editTransactionStatus(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
                                         <input type="text" class="hidden transaction_status_input flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->transaction_status }}" style="z-index: -1;">
                                     </td>
                                     <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
                                         <span>{{ $phonebook->transaction_type }}</span>
-                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editTransactionType(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none" onclick="editTransactionType(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
                                         <input type="text" class="hidden transaction_type flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->transaction_type }}" style="z-index: -1;">
                                     </td>
                                     <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500 relative">
                                         <span>{{ $phonebook->branch }}</span>
-                                        <button class="absolute right-0 top-0 transform translate-x-full -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onclick="editBranch(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
+                                        <button class="text-xs flex right-0 top-0 px-4 bg-danger-600 text-white px-2 py-1 rounded hover:bg-danger-700 focus:outline-none" onclick="editBranch(this)" data-phonebook-id="{{ $phonebook->id }}">Edit</button>                                        
                                         <input type="text" class="hidden branch flex top-0 left-0 w-full px-3 py-2 border rounded-md bg-white" value="{{ $phonebook->branch }}" style="z-index: -1;">
                                     </td>
                                     <td class="border-r px-6 py-4 dark:border-neutral-500">{{ $phonebook->reference_code }}</td>
                                     <td class="px-6 py-4">{{ $phonebook->transaction_time }}</td>
-                                    <td class="border-r px-6 py-4 dark:border-neutral-500">
-                                        <button class="text-xs bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 focus:outline-none" onclick="deleteTransaction(this)" data-phonebook-id="{{ $phonebook->id }}">Delete</button>
+                                    <td class="border-l px-6 py-4 dark:border-neutral-500">
+                                        <button class="font-bold text-xs bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 focus:outline-none" onclick="deleteTransaction(this)" data-phonebook-id="{{ $phonebook->id }}">Delete</button>
                                     </td>
                                 </tr>
                                 @endforeach

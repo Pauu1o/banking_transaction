@@ -226,6 +226,7 @@
 
                         <!-- Welcome Back -->
                         <div class="text-right">
+                            
                             <div class="ml-auto text-white text-lg font-semibold">
                                 Welcome Back! 
                             </div>
@@ -234,34 +235,28 @@
                                 </div>
                                 <div class="text-white text-lg">Europe Standard Time</div>
                                     <div id="clock" class="text-6xl py-4 font-bold text-danger-600"></div>
-                                    <div class="text-danger-600 py-4 font-bold text-2xl">1 EUR = <span id="converted-price"></span> PHP</div>
+                                        <div class="text-white text-lg">Philippine Standard Time</div>
+                                            <div id="clock1" class="text-6xl py-4 font-bold text-danger-600"></div>
+                                                <div class="text-white text-lg">Live Conversion rate </div>
+                                                    <div class="text-danger-600 py-4 font-bold text-3xl">1 EUR = <span id="converted-price"></span> PHP</div>
                                              
-                        </div>
-
-                            
-                        
-                            <!-- CLOCK IN PH -->
+                                
+                            </div>
+                                
+                        <!-- CLOCK IN Europe/Paris -->
                             <script>
-
-                                const createTransactionButton = document.querySelector('button[type="submit"]');
-                                
-                                createTransactionButton.addEventListener('click', setTransactionTime);
-                                
                                 function setTransactionTime() {
                                     console.log("Setting transaction time...");
                                     const now = new Date();
                                     const timeInput = document.getElementById('transaction_time');
-                                    // Format the current time as needed (e.g., to ISO format)
                                     const formattedTime = now.toISOString();
                                     timeInput.value = formattedTime;
-                                    document.querySelector('form').submit();
-
                                 }
-
+                            
                                 function startTime() {
                                     const today = new Date();
                                     const options = { timeZone: 'Europe/Paris' };
-                                    today.setUTCHours(today.getUTCHours() + 7);
+                                    today.setUTCHours(today.getUTCHours() + 2);
                                     let h = today.getHours();
                                     let m = today.getMinutes();
                                     let s = today.getSeconds();
@@ -274,39 +269,46 @@
                                 function checkTime(i) {
                                     if (i < 10) {
                                         i = "0" + i;
-                                    } // add zero in front of numbers < 10
+                                    }
                                     return i;
                                 }
                             
-                                startTime(); // Start the clock immediately
-
-                                // Add event listener to the form submission event
+                                startTime();
                             </script>
-                            
-                            <!-- Conversion API -->
+
+                            <!-- CLOCK IN Asia/Manila -->
                             <script>
-                                // const API_KEY = '52b74f0f831e0aa311149335';
-                                const req_url = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/EUR`;
-
-                                // Fetch data from the API
-                                fetch(req_url)
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        // Check if API request was successful
-                                        if (data.result === 'success') {
-                                            const base_price = 1; // Your price in EUR
-                                            const PHP_price = (base_price * data.conversion_rates.PHP).toFixed(2);
-
-                                            // Update the UI with the converted price
-                                            document.getElementById('converted-price').innerText = PHP_price;
-                                        } else {
-                                            console.error('Failed to fetch exchange rates:', data.error);
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error('Error fetching exchange rates:', error);
-                                    });
+                                function setTransactionTime1() {
+                                    console.log("Setting transaction time...");
+                                    const now = new Date();
+                                    const timeInput = document.getElementById('transaction_time1');
+                                    const formattedTime = now.toISOString();
+                                    timeInput.value = formattedTime;
+                                }
+                            
+                                function startTime1() {
+                                    const today = new Date();
+                                    const options = { timeZone: 'Asia/Manila' };
+                                    today.setUTCHours(today.getUTCHours() + 8);
+                                    let h = today.getHours();
+                                    let m = today.getMinutes();
+                                    let s = today.getSeconds();
+                                    m = checkTime(m);
+                                    s = checkTime(s);
+                                    document.getElementById('clock1').innerHTML = h + ":" + m + ":" + s;
+                                    setTimeout(startTime1, 1000);
+                                }
+                            
+                                function checkTime(i) {
+                                    if (i < 10) {
+                                        i = "0" + i;
+                                    }
+                                    return i;
+                                }
+                            
+                                startTime1();
                             </script>
+                         
                         </div>
                     </div>
                    
@@ -316,6 +318,7 @@
                         
                         <!-- SEARCH BAR -->
                         <div class="py-2">
+                            
                             <form action="{{ route('phonebook.filter') }}" method="GET" class="flex">
                                 <div class="relative">
                                     <input type="text" name="reference_code" id="searchInput" class="px-10 py-2 mb-2 mr-2 border rounded-full" placeholder="Search Reference Code...">
@@ -326,6 +329,8 @@
                                 </div>
                             </form>
                                 
+                                                
+
                         </div>                         
                     </div>
                 </div>
@@ -340,41 +345,41 @@
                                     <tr>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500 rounded-tl-[1.5rem]">
+                                            class="border-r px-2 py-2 dark:border-neutral-500 rounded-tl-[1.5rem]">
                                             Sender Name
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Receiver Name
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500 ">
+                                            class="border-r px-2 py-1 dark:border-neutral-500 ">
                                             Amount (Pesos) 
                                         </th>
                                       
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Transaction Status
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Transaction Type
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Branch
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Reference Code
                                         </th>
-                                        <th scope="col" class="px-3 py-2 rounded-tr-[1.5rem]">Time</th>
+                                        <th scope="col" class="px-2 py-2 rounded-tr-[1.5rem]">Time</th>
                                         
                                     </tr>
                                 </thead>
@@ -385,27 +390,27 @@
                                                 <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->sender_firstname }} {{ $cont->sender_lastname }}
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->receiver_firstname }} {{ $cont->receiver_lastname }}
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->amount }} 
                                                 <br>
                                          
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->transaction_status }} 
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->transaction_type }} 
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-center font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->branch }} 
                                                 <br>
                                 
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->reference_code }} 
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->transaction_time }} 
                                                 <br>
                                         </tr>
@@ -427,45 +432,45 @@
                                     <tr>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500 rounded-tl-[1.5rem]">
+                                            class="border-r px-2 py-2 dark:border-neutral-500 rounded-tl-[1.5rem]">
                                             Sender Name
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Receiver Name
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500 ">
+                                            class="border-r px-2 py-1 dark:border-neutral-500 ">
                                             Amount (Pesos) 
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Amount (Euro)
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Transaction Status
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Transaction Type
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Branch
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-3 py-2 dark:border-neutral-500">
+                                            class="border-r px-2 py-1 dark:border-neutral-500">
                                             Reference Code
                                         </th>
-                                        <th scope="col" class="px-3 py-2 rounded-tr-[1.5rem]">Time</th>
+                                        <th scope="col" class="px-2 py-2 rounded-tr-[1.5rem]">Time</th>
                                         
                                     </tr>
                                 </thead>
@@ -476,29 +481,29 @@
                                                 <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->sender_firstname }} {{ $cont->sender_lastname }}
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->receiver_firstname }} {{ $cont->receiver_lastname }}
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->amount }} 
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->amount*60}} 
                                                 <br>
                                          
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->transaction_status }} 
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-6 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->transaction_type }} 
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-center font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->branch}} 
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->reference_code }} 
                                                 <br>
-                                                <td class="whitespace-nowrap text-left font-bold border-r px-4 py-2 dark:border-neutral-500">
+                                                <td class="whitespace-nowrap text-left font-bold border-r px-3 py-2 dark:border-neutral-500">
                                                 {{ $cont->transaction_time }} 
                                                 <br>
                                         </tr>
