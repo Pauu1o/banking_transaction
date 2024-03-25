@@ -220,7 +220,7 @@
                                 Create Transaction
                             </button>
                         </form>  
-
+                        <div class=" text-white opacity-60 text-center py-3">Sender and Reciever should be in the System</div>            
                         
                         </div>
 
@@ -235,13 +235,11 @@
                                 </div>
                                 <div class="text-white text-lg">Europe Standard Time</div>
                                     <div id="clock" class="text-6xl py-4 font-bold text-danger-600"></div>
-                                    <div class="text-white text-lg">Phillippne Standard Time</div>
-                                    <div id="clock1" class="text-6xl py-4 font-bold text-danger-600"></div>
-                                            <div id="clockPH" class="text-6xl py-4 font-bold text-danger-600"></div>
+                                        <div class="text-white text-lg">Phillippne Standard Time</div>
+                                            <div id="clock1" class="text-6xl py-4 font-bold text-danger-600"></div>
                                                 <div class="text-white text-lg">Live Conversion rate </div>
                                                     <div class="text-danger-600 py-4 font-bold text-3xl">1 EUR = <span id="converted-price"></span> PHP</div>
-                                             
-                                
+                                                        <div id="clockPH" class="text-6xl py-4 font-bold text-danger-600"></div>    
                             </div>
                                 
                         <!-- CLOCK IN Europe/Paris -->
