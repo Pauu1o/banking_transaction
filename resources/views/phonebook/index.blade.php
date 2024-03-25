@@ -18,7 +18,7 @@
                         @if ($errors->any())
                             @foreach ($errors->all() as $error)
                             <div
-                                class="mb-3 inline-flex w-full items-center rounded-lg bg-danger-100 px-6 py-1 text-base text-danger-700 transition-opacity ease-in duration-700 opacity-100"
+                                class="mb-2 inline-flex w-full items-center rounded-lg bg-danger-100 px-6 py-1 text-base text-danger-700 transition-opacity ease-in duration-700 opacity-100"
                                 role="alert">
                                 <span class="mr-2">
                                     <svg
@@ -38,10 +38,10 @@
                             @endforeach
                         @endif
                         
-                        <form method="POST" action="{{ route('phonebook.store') }}">
+                        <form method="POST"action="{{ route('phonebook.store') }}">
                         @csrf <!-- {{ csrf_field() }} -->
 
-                        <div class="grid grid-cols-2 gap-2">
+                        <div class="grid grid-cols-2 gap-2 justify-center">
                                 
                             <!--Sender First name input-->
                             <div class="relative mb-6">
@@ -214,7 +214,7 @@
                             <!--Submit button-->
                             <button
                                 type="submit"
-                                class="inline-block w-full rounded-[1rem] bg-danger-600 px-10 pb-2 pt-2 text-md font-bold uppercase leading-normal text-white transition duration-150 ease-in-out focus:bg-danger-700 hover:text-white hover:bg-danger-700 focus:outline-none focus:ring-0 active:bg-gray-200"
+                                class=" inline-block w-full rounded-[1rem] bg-danger-600 py-10 pb-2 pt-2 text-md font-bold uppercase leading-normal text-white transition duration-150 ease-in-out focus:bg-danger-700 hover:text-white hover:bg-danger-700 focus:outline-none focus:ring-0 active:bg-gray-200"
                                 data-te-ripple-init
                                 data-te-ripple-color="light">
                                 Create Transaction
@@ -235,8 +235,9 @@
                                 </div>
                                 <div class="text-white text-lg">Europe Standard Time</div>
                                     <div id="clock" class="text-6xl py-4 font-bold text-danger-600"></div>
-                                        <div class="text-white text-lg">Philippine Standard Time</div>
-                                            <div id="clock1" class="text-6xl py-4 font-bold text-danger-600"></div>
+                                    <div class="text-white text-lg">Phillippne Standard Time</div>
+                                    <div id="clock1" class="text-6xl py-4 font-bold text-danger-600"></div>
+                                            <div id="clockPH" class="text-6xl py-4 font-bold text-danger-600"></div>
                                                 <div class="text-white text-lg">Live Conversion rate </div>
                                                     <div class="text-danger-600 py-4 font-bold text-3xl">1 EUR = <span id="converted-price"></span> PHP</div>
                                              
@@ -244,19 +245,27 @@
                             </div>
                                 
                         <!-- CLOCK IN Europe/Paris -->
-                            <script>
+                      <script>
+
+                                const createTransactionButton = document.querySelector('button[type="submit"]');
+                                
+                                createTransactionButton.addEventListener('click', setTransactionTime);
+                                
                                 function setTransactionTime() {
                                     console.log("Setting transaction time...");
                                     const now = new Date();
                                     const timeInput = document.getElementById('transaction_time');
+                                    // Format the current time as needed (e.g., to ISO format)
                                     const formattedTime = now.toISOString();
                                     timeInput.value = formattedTime;
+                                    document.querySelector('form').submit();
+
                                 }
-                            
+
                                 function startTime() {
                                     const today = new Date();
                                     const options = { timeZone: 'Europe/Paris' };
-                                    today.setUTCHours(today.getUTCHours() + 2);
+                                    today.setUTCHours(today.getUTCHours() +7 );
                                     let h = today.getHours();
                                     let m = today.getMinutes();
                                     let s = today.getSeconds();
@@ -269,46 +278,72 @@
                                 function checkTime(i) {
                                     if (i < 10) {
                                         i = "0" + i;
-                                    }
+                                    } // add zero in front of numbers < 10
                                     return i;
                                 }
                             
-                                startTime();
+                                startTime(); // Start the clock immediately
+
+                                // Add event listener to the form submission event
                             </script>
 
-                            <!-- CLOCK IN Asia/Manila -->
-                            <script>
-                                function setTransactionTime1() {
-                                    console.log("Setting transaction time...");
-                                    const now = new Date();
-                                    const timeInput = document.getElementById('transaction_time1');
-                                    const formattedTime = now.toISOString();
-                                    timeInput.value = formattedTime;
-                                }
                             
-                                function startTime1() {
-                                    const today = new Date();
-                                    const options = { timeZone: 'Asia/Manila' };
-                                    today.setUTCHours(today.getUTCHours() + 8);
-                                    let h = today.getHours();
-                                    let m = today.getMinutes();
-                                    let s = today.getSeconds();
-                                    m = checkTime(m);
-                                    s = checkTime(s);
-                                    document.getElementById('clock1').innerHTML = h + ":" + m + ":" + s;
-                                    setTimeout(startTime1, 1000);
-                                }
-                            
-                                function checkTime(i) {
-                                    if (i < 10) {
-                                        i = "0" + i;
+
+                                <script>
+                                    function setTransactionTime1() {
+                                        console.log("Setting transaction time...");
+                                        const now = new Date();
+                                        const timeInput = document.getElementById('transaction_time1');
+                                        const formattedTime = now.toISOString();
+                                        timeInput.value = formattedTime;
                                     }
-                                    return i;
-                                }
+                                
+                                    function startTime1() {
+                                        const today = new Date();
+                                        const options = { timeZone: 'Asia/Manila' };
+                                        today.setUTCHours(today.getUTCHours() + 12); // Adjust to the appropriate timezone offset
+                                        let h = today.getHours();
+                                        let m = today.getMinutes();
+                                        let s = today.getSeconds();
+                                        m = checkTime(m);
+                                        s = checkTime(s);
+                                        document.getElementById('clock1').innerHTML = h + ":" + m + ":" + s;
+                                        setTimeout(startTime1, 1000);
+                                    }
+                                
+                                    function checkTime(i) {
+                                        if (i < 10) {
+                                            i = "0" + i;
+                                        }
+                                        return i;
+                                    }
+                                
+                                    startTime1();
+                                </script>
                             
-                                startTime1();
+                            <script>
+                                // const API_KEY = '52b74f0f831e0aa311149335';
+                                const req_url = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/EUR`;
+
+                                // Fetch data from the API
+                                fetch(req_url)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // Check if API request was successful
+                                        if (data.result === 'success') {
+                                            const base_price = 1; // Your price in EUR
+                                            const PHP_price = (base_price * data.conversion_rates.PHP).toFixed(2);
+
+                                            // Update the UI with the converted price
+                                            document.getElementById('converted-price').innerText = PHP_price;
+                                        } else {
+                                            console.error('Failed to fetch exchange rates:', data.error);
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error fetching exchange rates:', error);
+                                    });
                             </script>
-                         
                         </div>
                     </div>
                    
