@@ -6,10 +6,10 @@
 <body class = "admin-page">
 
 <div class="ml-64 flex-1">
-    <div class="mx-auto max-w-10xl py-6 sm:px-10 lg:px-8">
+<div class="mx-auto max-w-10xl py-6 sm:px-10 lg:px-8">
         <div class="flex left">
             <div class="overflow-x-auto sm:-mx-2 lg:-mx-4">         
-                <div class="inline-block min-w-right py-2 sm:px-6 lg:px-8">
+            <div class="inline-block min-w-right py-2 sm:px-6 lg:px-8">
                     
                         
                         <!-- SEARCH BAR -->

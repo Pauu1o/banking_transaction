@@ -35,7 +35,7 @@ Route::get('/transactions', function () {
 // })->name('admin.index');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin/edit');
 });
 
 
