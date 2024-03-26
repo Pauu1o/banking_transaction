@@ -43,17 +43,14 @@ class AuthenticationController extends Controller
             $admin = admin::where('email', 'admin@admin.com')->first();
             if ($admin) {
                 Auth::login($admin);
-<<<<<<< HEAD
 
-                return redirect()->intended('admin/dashboard');
+                return redirect()->intended('admin');
 
                 //return redirect()->intended('resources/views/admin/index.blade.php');
                 return redirect()->route('admin.index');
 
-=======
                 //return redirect()->intended('resources/views/admin/index.blade.php');
                 return redirect()->route('admin.index');
->>>>>>> 500a0d69a122f449bdbd86f2efe1d6903730d04b
             }
         }
 
@@ -64,7 +61,6 @@ class AuthenticationController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
 

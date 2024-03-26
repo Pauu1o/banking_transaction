@@ -43,7 +43,7 @@ Login
 
 
           <!-- LOGO SECTION -->
-          <div id="logo" class="flex flex-row justify-center text-center text-xl font-bold items-center py-4 text-danger">BANKING TRANSACTION</div>
+          <div id="logo" class="flex flex-row justify-center text-center text-xl font-bold items-center py-4 text-danger">MONEY TRANSACTION</div>
           <!--Sign in section-->
           <div class="flex flex-row px-5 py-2 justify-start ">
             <p class="text-center mb-auto  text-sm text-white">Sign in with</p>

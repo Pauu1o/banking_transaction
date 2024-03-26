@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PhonebookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,17 +13,32 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Route definition in Laravel
+Route::get('/phonebook', [PhonebookController::class, 'index'])->name('phonebook.index');
 
-<<<<<<< HEAD
-=======
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin.index');
+Route::get('/phonebook/filter', [PhonebookController::class, 'filter'])->name('phonebook.filter');
 
->>>>>>> 500a0d69a122f449bdbd86f2efe1d6903730d04b
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/admin', [PhonebookController::class, 'adminPage'])->name('admin.page');
+
+Route::get('/transactions', function () {
+    $referenceCode = request()->input('reference_code');
+    
+    // Step 3: Server-Side Filtering
+    $filteredTransactions = Phonebook::where('reference_code', $referenceCode)->get();
+
+    // Step 4: Return Filtered Data
+    return response()->json($filteredTransactions);
 });
+
+// Route::get('/admin', function () {
+//     return view('admin.index');
+// })->name('admin.index');
+
+Route::get('/', function () {
+    return view('admin/edit');
+});
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard/content');
@@ -36,6 +52,9 @@ Route::get('/contact', function () {
     return view('contact/content'); //path of your view file
 });
 
+Route::get('/phonebook/{id}/edit', [PhonebookController::class, 'edit'])->name('phonebook.edit');
+Route::post('/phonebook/{id}', [PhonebookController::class, 'update'])->name('phonebook.update');
+Route::delete('/phonebook/{id}', [PhonebookController::class, 'destroy'])->name('phonebook.destroy');
 
 
 

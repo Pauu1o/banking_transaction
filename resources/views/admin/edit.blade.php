@@ -1,4 +1,6 @@
-@extends('auth.layouts.app')
+@extends('layouts-admin.app')
+
+@section('content')
 
 @section('webtitle')
 Register
@@ -6,13 +8,18 @@ Register
 
 @section('content')
 <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com --> 
-  <section class="h-screen">
-  <div class="h-full">
+<body class="admin-page">
  
 
       <!-- Center column container -->
-    <div class="flex justify-center items-center h-screen">
-    <div class="w-3/12">
+
+      <div class="ml-64 flex">
+        <div class="flex left">
+          <div class="mx-auto max-w-10xl py-6 sm:px-10 lg:px-8">
+            <div class="overflow-x-auto sm:-mx-2 lg:-mx-4">         
+                <div class="inline-block min-w-right py-2 px-6">
+                    
+                    
       @if ($errors->any())
         @foreach ($errors->all() as $error)
           <div
@@ -57,45 +64,41 @@ Register
           @csrf <!-- {{ csrf_field() }} -->
           <!--Sign in section-->
           <div
-          class="flex flex-row py-4 justify-center text-xl font-bold items-center text-danger">
-            <p class="mb-0 mr-4 text-lg">REGISTRATION</p>
+          class="flex flex-row py-4 justify-left text-xl font-bold items-center text-danger">
+            <p class="mb-0 mr-4 text-lg">REGISTER NEW USER</p>
           </div>
-
-          <!-- Separator between social media sign in and email/password sign in -->
-          
-
 
           <!-- First Name -->
           <div class="relative mb-6">
-              <input
-              type="text"
-              class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-              id="first_name"
-              name="first_name"
-              placeholder="first_name" />
-            <label
-              for="first_name"
-              class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
-              >First Name
-            </label>
-            <style>
-              #first_name:not(:placeholder-shown) + label {
-                display: none;
-                }
-            </style>
-          </div>
-        
+                <input
+                    type="text"
+                    class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    id="first_name"
+                    name="first_name"
+                    placeholder="first_name" />
+                <label
+                    for="first_name"
+                    class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
+                    >First Name
+                </label>
+                <style>
+                    #first_name:not(:placeholder-shown) + label {
+                        display: none;
+                    }
+                </style>
+            </div>
+
           <!-- Last Name -->
           <div class="relative mb-6">
               <input
               type="text"
-              class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+              class="peer block min-h-[auto] w-full rounded-[1rem] border-0 bg-white px-3 py-[0.32rem]  leading-[2.15] outline-1 transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-dark dark:placeholder:text-dark-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
               id="last_name"
               name="last_name"
               placeholder="last_name" />
             <label
               for="last_name"
-              class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
+                                class="pointer-events-none rounded-[1rem] absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:hidden"
               >Last Name
             </label>
             <style>
@@ -166,27 +169,51 @@ Register
           </div>
           
           <!-- Login button -->
-          <div class="text-center lg:text-left">
+          <div class="text-left lg:text-left">
             <button
               type="submit"
               class="inline-block rounded-full bg-danger-600 px-10 pb-2 pt-2 text-md font-bold uppercase leading-normal text-white transition duration-150 ease-in-out focus:bg-danger-700 hover:text-white hover:bg-danger-700 focus:outline-1 focus:ring-0 active:bg-gray-200">
               Register
-            </button>
-
-            <!-- Register link -->
-            <p class="mb-0 mt-2 pt-1 text-sm font-semibold">
-              Already have an account?
-              <a
-                href="{{route('login')}}"
-                class="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700"
-                >login now</a
-              >
-            </p>
-          </div>
+            </button>  
+          </div>     
         </form>
+        
       </div>
+      </div>
+      </div>
+      <div class="overflow-auto justify-center">
+      <div class="mx-auto max-w-10xl py-6 sm:px-10 lg:px-8">
+            <div class="overflow-x-auto sm:-mx-2 lg:-mx-4">         
+                <div class="inline-block min-w-right py-2 sm:px-6 lg:px-8">
+      <table
+                            class="text-center text-sm font-light dark:border-neutral-500 ">
+                                <thead class=" text-xs text-white dark:border-neutral-500 dark:bg-neutral-600">
+                                    <tr class>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-4 py-3 dark:border-neutral-500 rounded-tl-[1.5rem]">
+                                            User First Name
+                                        </th>
+
+                                        <th
+                                            scope="col"
+                                            class="border-r px-2 py-3 dark:border-neutral-500">
+                                            User Last Name
+                                        </th>
+                                          
+                                        <th
+                                            scope="col"
+                                            class="border-l px-6 py-3 dark:border-neutral-500 rounded-tr-[1.5rem]">
+                                            User Email Address
+                                        </th>
+
+                                       
+                                    </tr>
+                                  </thead>
+          </tbody>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</body>
 @endsection
